@@ -7,7 +7,6 @@
 <%@page import="java.sql.DriverManager"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-
 	//데이터베이스 처리
 	String host = "jdbc:mysql://127.0.0.1:3306/userdb";
 	String user = "root";
@@ -65,7 +64,7 @@
 				<td><%= vo.getHp() %></td>
 				<td><%= vo.getAge() %></td>
 				<td>
-					<a href="#">수정</a>
+					<a href="/Ch06/user1/modify.jsp?uid=<%= vo.getUid() %>">수정</a>
 					<a href="#">삭제</a>
 				</td>
 			</tr>
