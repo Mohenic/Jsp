@@ -12,8 +12,11 @@
 	</head>
 	<body>
 		<h3>1.JDBC 실습</h3>
-		
-		<a href="/Ch06/user1/register.jsp">User1 CRUD 실습</a>
-		
+		<a href="/Ch06/user1/register.jsp">User1 CRUD 실습</a><br>
+		<a href="/Ch06/user2/register.jsp">User2 CRUD 실습</a><br>
+		<a href="/Ch06/user3/register.jsp">User3 CRUD 실습</a><br>
+		<a href="/Ch06/user4/register.jsp">User4 CRUD 실습</a><br>
+		<a href="/Ch06/user5/register.jsp">User5 CRUD 실습</a><br>
+		<a href="/Ch06/member/register.jsp">Member CRUD 실습</a><br>
 	</body>
 </html>
