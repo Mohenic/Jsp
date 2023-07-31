@@ -10,9 +10,7 @@
 			내용 : JSP AJAX 실습하기
 		-->
 		<script>
-			
 			window.onload = function(){
-				
 				const btn1 = document.getElementById("btn1");
 				const spans = document.getElementsByTagName('span');
 				
@@ -75,15 +73,10 @@
 	
 	                            table.appendChild(tr);   
 							}
-							
 						}); // fetch end
-					
 				}); // addEventListener end
-				
-				
 			} // window.onload end
 		</script>
-		
 	</head>
 	<body>
 		<h3>3.AJAX 실습하기</h3>
@@ -111,11 +104,7 @@
 				<th>휴대폰</th>
 				<th>나이</th>
 			</tr>
-			
 		</table>
-		
-		
-		
 		
 	</body>
 </html>
