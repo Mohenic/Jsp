@@ -11,6 +11,7 @@
 		-->
 		<script>
 			window.onload = function(){
+				// 집에서 수정
 				const btn1 = document.getElementById("btn1");
 				const spans = document.getElementsByTagName('span');
 				
