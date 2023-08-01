@@ -37,9 +37,7 @@
 								spans[3].innerText = data.age;
 							}
 						}
-						
 					}// onreadystatechange end
-					
 				} // btn1 onclick end
 				
 				const table = document.getElementsByTagName('table')[0];				
@@ -75,12 +73,8 @@
 	
 	                            table.appendChild(tr);   
 							}
-							
 						}); // fetch end
-					
 				}); // addEventListener end
-				
-				
 			} // window.onload end
 		</script>
 		
@@ -111,11 +105,10 @@
 				<th>휴대폰</th>
 				<th>나이</th>
 			</tr>
-			
 		</table>
 		
 		
 		
-		
+				
 	</body>
 </html>
