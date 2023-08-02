@@ -5,7 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jboard::register</title>
-    <link rel="stylesheet" href="../css/style.css">    
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+    	
+    	$(function(){
+    		
+    		// 아이디 중복체크
+    		$('#btnCheckUid').click(function(){
+    			
+    			const uid = $('input[name=uid]').val();
+    			const jsonData = {
+    				"uid": uid
+    			};
+    			
+    			$.ajax({
+    				url:'/Jboard1/user/checkUid.jsp',
+    				type:'GET',
+    				data: jsonData,
+    				dataType:'json',
+    				success:function(data){
+    					if(data.result >= 1){
+    						$('.resultId').css('color', 'red').text('이미 사용중인 아이디 입니다.');
+    					}else{
+    						$('.resultId').css('color', 'green').text('사용 가능한 아이디 입니다.');
+    					}
+    				}
+    			});
+    		});
+    	});
+    
+    </script>
 </head>
 <body>
     <div id="container">
@@ -21,7 +51,7 @@
                             <td>아이디</td>
                             <td>
                                 <input type="text" name="uid" placeholder="아이디 입력"/>
-                                <button><img src="../images/chk_id.gif" alt=""></button>
+                                <button type="button" id="btnCheckUid"><img src="../images/chk_id.gif" alt=""></button>
                                 <span class="resultId"></span>
                             </td>
                         </tr>
