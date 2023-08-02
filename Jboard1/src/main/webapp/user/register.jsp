@@ -5,10 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jboard::register</title>
-    <link rel="stylesheet" href="../css/style.css">
-    <style>
-        
-    </style>
+    <link rel="stylesheet" href="../css/style.css">    
 </head>
 <body>
     <div id="container">
@@ -17,7 +14,7 @@
         </header>
         <main>
             <section class="register">
-                <form action="#">
+                <form action="/Jboard1/user/registerProc.jsp" method="post">
                     <table border="1">
                         <caption>사이트 이용정보 입력</caption>
                         <tr>
