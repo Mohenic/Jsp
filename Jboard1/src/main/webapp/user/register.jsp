@@ -10,10 +10,12 @@
     <script>
     	
     	$(function(){
+    		
     		// 아이디 중복체크
     		$('#btnCheckUid').click(function(){
     			
     			const uid = $('input[name=uid]').val();
+    			    			
     			const jsonData = {
     				"uid": uid
     			};
@@ -31,6 +33,7 @@
     					}
     				}
     			});
+    			
     		}); // 아이디 중복체크 끝
     		
     		// 닉네임 중복체크
@@ -85,7 +88,30 @@
 						}
 					}    				
     			}// onreadystatechange end
-    		} // email.onfocusout end
+    		} // 이메일 중복체크 끝
+    		
+    		// 휴대폰 중복체크
+    		document.getElementsByName('hp')[0].addEventListener('focusout', function(){
+    			
+    			const url = '/Jboard1/user/checkHp.jsp?hp='+this.value;
+    			
+				fetch(url)
+					.then(response => response.json())
+					.then(data => {
+						console.log(data);
+						const resultHp = document.getElementById('resultHp');
+						
+						if(data.result >= 1){
+							resultHp.innerText = '이미 사용중인 휴대폰번호 입니다.';
+							resultHp.style.color = 'red';
+						}else{
+							resultHp.innerText = '사용 가능한 휴대폰번호 입니다.';
+							resultHp.style.color = 'green';
+						}
+					});
+				
+    		}); // 휴대폰 중복체크 끝
+    		
     		
     	});
     
