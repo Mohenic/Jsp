@@ -63,14 +63,9 @@
 					isNameOk = false;					
 				}
 			});
-			
-			// 별명 검사
-			// 이메일 검사
-			// 휴대폰 검사
-			
+						
 			// 최종 전송
 			$('#formUser').submit(function(){
-				
 				if(!isUidOk){
 					return false; // 폼 전송 취소	
 				}
