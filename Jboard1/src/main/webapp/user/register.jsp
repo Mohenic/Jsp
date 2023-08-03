@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jboard::register</title>
+    <title>회원가입</title>
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script>
@@ -32,7 +32,34 @@
     					}
     				}
     			});
+    		}); // 아이디 중복체크 끝
+    		
+    		// 닉네임 중복체크
+    		$('input[name=nick]').focusout(function(){
+    			
+    			// 입력 데이터 가져오기
+    			const nick = $(this).val();
+    			//console.log('nick : ' + nick);
+    			
+    			// JSON 생성
+    			const jsonData = {
+    				"nick": nick 
+    			};
+    			
+    			// 데이터 전송
+    			$.get('/Jboard1/user/checkNick.jsp', jsonData, function(data){
+    				
+    				if(data.result >= 1){
+    					$('.resultNick').css('color', 'red').text('이미 사용중인 별명 입니다.');
+    				}else{
+    					$('.resultNick').css('color', 'green').text('사용 가능한 별명 입니다.');
+    				}
+    				
+    			});
+    			
     		});
+    		
+    		
     	});
     
     </script>
