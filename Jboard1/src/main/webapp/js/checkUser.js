@@ -1,13 +1,18 @@
 /**
  * 사용자 개인정보 중복체크
  */
-// 사용자 개인정보 중복체크
 $(function(){
 	
 	// 아이디 중복체크
 	$('#btnCheckUid').click(function(){
 		
 		const uid = $('input[name=uid]').val();
+		
+		if(!uid.match(reUid)){
+			$('.resultId').css('color', 'red').text('유효한 아이디가 아닙니다.');
+			isUidOk = false;
+			return; // 종료
+		}
 		    			
 		const jsonData = {
 			"uid": uid
@@ -21,8 +26,10 @@ $(function(){
 			success:function(data){
 				if(data.result >= 1){
 					$('.resultId').css('color', 'red').text('이미 사용중인 아이디 입니다.');
+					isUidOk = false;
 				}else{
 					$('.resultId').css('color', 'green').text('사용 가능한 아이디 입니다.');
+					isUidOk = true;
 				}
 			}
 		});
