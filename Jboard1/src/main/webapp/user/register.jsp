@@ -26,9 +26,14 @@
 		let reEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 		let reHp    = /^01(?:0|1|[6-9])-(?:\d{4})-\d{4}$/;
 	
-		
 		// 유효성 검증(Validation)
 		$(function(){
+			
+			// 아이디 검사
+			$('input[name=uid]').keydown(function(){
+				$('.resultId').text('');
+				isUidOk = false;
+			});
 			
 			// 비밀번호 검사
 			$('input[name=pass2]').focusout(function(){
@@ -67,26 +72,32 @@
 			// 최종 전송
 			$('#formUser').submit(function(){
 				if(!isUidOk){
+					alert('아이디를 확인 하십시요.');
 					return false; // 폼 전송 취소	
 				}
 				
 				if(!isPassOk){
+					alert('비밀번호를 확인 하십시요.');
 					return false; // 폼 전송 취소	
 				}
 				
 				if(!isNameOk){
+					alert('이름를 확인 하십시요.');
 					return false; // 폼 전송 취소	
 				}
 				
 				if(!isNickOk){
+					alert('별명을 확인 하십시요.');
 					return false; // 폼 전송 취소	
 				}
 				
 				if(!isEmailOk){
+					alert('이메일을 확인 하십시요.');
 					return false; // 폼 전송 취소	
 				}
 				
 				if(!isHpOk){
+					alert('휴대폰을 확인 하십시요.');
 					return false; // 폼 전송 취소	
 				}
 								

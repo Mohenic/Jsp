@@ -78,6 +78,7 @@ $(function(){
 			resultEmail.innerText = '유효한 이메일이 아닙니다.';
 			resultEmail.style.color = 'red';
 			isEmailOk = false;
+			return;
 		}
 
 		// 데이터 전송
@@ -116,6 +117,7 @@ $(function(){
 			resultHp.innerText = '유효한 휴대폰번호가 아닙니다.';
 			resultHp.style.color = 'red';
 			isHpOk = false;
+			return;
 		}
 		
 		const url = '/Jboard1/user/checkHp.jsp?hp='+this.value;
