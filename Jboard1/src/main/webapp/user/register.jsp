@@ -7,115 +7,62 @@
     <title>회원가입</title>
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <script>
-    	
-    	$(function(){
-    		
-    		// 아이디 중복체크
-    		$('#btnCheckUid').click(function(){
-    			
-    			const uid = $('input[name=uid]').val();
-    			    			
-    			const jsonData = {
-    				"uid": uid
-    			};
-    			
-    			$.ajax({
-    				url:'/Jboard1/user/checkUid.jsp',
-    				type:'GET',
-    				data: jsonData,
-    				dataType:'json',
-    				success:function(data){
-    					if(data.result >= 1){
-    						$('.resultId').css('color', 'red').text('이미 사용중인 아이디 입니다.');
-    					}else{
-    						$('.resultId').css('color', 'green').text('사용 가능한 아이디 입니다.');
-    					}
-    				}
-    			});
-    			
-    		}); // 아이디 중복체크 끝
-    		
-    		// 닉네임 중복체크
-    		$('input[name=nick]').focusout(function(){
-    			
-    			// 입력 데이터 가져오기
-    			const nick = $(this).val();
-    			
-    			// JSON 생성
-    			const jsonData = {
-    				"nick": nick 
-    			};
-    			
-    			// 데이터 전송
-    			$.get('/Jboard1/user/checkNick.jsp', jsonData, function(data){
-    				if(data.result >= 1){
-    					$('.resultNick').css('color', 'red').text('이미 사용중인 별명 입니다.');
-    				}else{
-    					$('.resultNick').css('color', 'green').text('사용 가능한 별명 입니다.');
-    				}
-    			});
-    			
-    		});// 닉네임 중복체크 끝
-    		
-    		// 이메일 중복체크
-    		document.getElementsByName('email')[0].onfocusout = function(){
-    			
-    			// 입력 데이터 가져오기
-    			const email = this.value;
-    			 
-    			// 데이터 전송
-    			const xhr = new XMLHttpRequest();
-    			xhr.open('GET', '/Jboard1/user/checkEmail.jsp?email='+email);
-    			xhr.send();
-    			
-    			// 응답 결과
-    			xhr.onreadystatechange = function(){    				
-    				if(xhr.readyState == XMLHttpRequest.DONE){						
-						if(xhr.status == 200){
-							const data = JSON.parse(xhr.response);
-							console.log('data : ' + data);
-							
-							const resultEmail = document.getElementById('resultEmail');
-							
-							if(data.result >= 1){
-								resultEmail.innerText = '이미 사용중인 이메일 입니다.';
-								resultEmail.style.color = 'red';
-							}else{
-								resultEmail.innerText = '사용 가능한 이메일 입니다.';
-								resultEmail.style.color = 'green';
-							}
-						}
-					}    				
-    			}// onreadystatechange end
-    		} // 이메일 중복체크 끝
-    		
-    		// 휴대폰 중복체크
-    		document.getElementsByName('hp')[0].addEventListener('focusout', function(){
-    			
-    			const url = '/Jboard1/user/checkHp.jsp?hp='+this.value;
-    			
-				fetch(url)
-					.then(response => response.json())
-					.then(data => {
-						console.log(data);
-						const resultHp = document.getElementById('resultHp');
-						
-						if(data.result >= 1){
-							resultHp.innerText = '이미 사용중인 휴대폰번호 입니다.';
-							resultHp.style.color = 'red';
-						}else{
-							resultHp.innerText = '사용 가능한 휴대폰번호 입니다.';
-							resultHp.style.color = 'green';
-						}
-					});
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="/Jboard1/js/zipcode.js"></script>
+    <script src="/Jboard1/js/checkUser.js"></script>
+	<script>
+		
+		// 폼 데이터 검증결과 상태변수
+		let isUidOk   = false;
+		let isPassOk  = false;
+		let isNameOk  = false;
+		let isNickOk  = false;
+		let isEmailOk = false;
+		let isHpOk    = false;
+	
+		
+		// 유효성 검증(Validation)
+		$(function(){
+			
+			// 아이디 검사
+			// 비밀번호 검사
+			// 이름 검사
+			// 별명 검사
+			// 이메일 검사
+			// 휴대폰 검사
+			
+			// 최종 전송
+			$('#formUser').submit(function(){
 				
-    		}); // 휴대폰 중복체크 끝
-    		
-    		
-    	});
-    
-    </script>
+				if(!isUidOk){
+					return false; // 폼 전송 취소	
+				}
+				
+				if(!isPassOk){
+					return false; // 폼 전송 취소	
+				}
+				
+				if(!isNameOk){
+					return false; // 폼 전송 취소	
+				}
+				
+				if(!isNickOk){
+					return false; // 폼 전송 취소	
+				}
+				
+				if(!isEmailOk){
+					return false; // 폼 전송 취소	
+				}
+				
+				if(!isHpOk){
+					return false; // 폼 전송 취소	
+				}
+								
+				return true; // 폼 전송 시작
+			});
+			
+		}); // 유효성 검증 끝
+	</script>
 </head>
 <body>
     <div id="container">
@@ -124,7 +71,7 @@
         </header>
         <main>
             <section class="register">
-                <form action="/Jboard1/user/registerProc.jsp" method="post">
+                <form id="formUser" action="/Jboard1/user/registerProc.jsp" method="post">
                     <table border="1">
                         <caption>사이트 이용정보 입력</caption>
                         <tr>
@@ -184,7 +131,7 @@
                             <td>
                                 <div>
                                     <input type="text" name="zip" placeholder="우편번호" readonly/>                                
-                                    <button class="btnZip"><img src="../images/chk_post.gif" alt=""></button>
+                                    <button type="button" class="btnZip" onclick="zipcode()"><img src="../images/chk_post.gif" alt=""></button>
                                 </div>                            
                                 <div>
                                     <input type="text" name="addr1" placeholder="주소를 검색하세요." readonly/>
