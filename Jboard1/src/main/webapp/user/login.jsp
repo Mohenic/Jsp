@@ -14,7 +14,7 @@
         </header>
         <main>
             <section class="login">
-                <form action="#">
+                <form action="/Jboard1/user/loginProc.jsp" method="post">
                     <table border="0">
                         <tr>
                             <td><img src="../images/login_ico_id.png" alt="아이디"></td>
