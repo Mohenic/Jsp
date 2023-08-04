@@ -8,9 +8,11 @@
 <%@page import="javax.naming.Context"%>
 <%@ page contentType="application/json;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
+	// 데이터 수신
 	request.setCharacterEncoding("UTF-8");
 	String uid = request.getParameter("uid");
 	
+	// DB 조회
 	int result = UserDAO.getInstance().selectCountUid(uid);
 	
 	// Json 생성

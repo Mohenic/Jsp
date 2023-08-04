@@ -2,6 +2,7 @@ package kr.co.jboard1.dao;
 
 import kr.co.jboard1.db.DBHelper;
 import kr.co.jboard1.db.SQL;
+import kr.co.jboard1.vo.TermsVO;
 import kr.co.jboard1.vo.UserVO;
 
 public class UserDAO extends DBHelper {
@@ -75,27 +76,82 @@ public class UserDAO extends DBHelper {
 			if(rs.next()){
 				result = rs.getInt(1);
 			}
+			close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return result;
+	}
+	public int selectCountNick(String nick) {
+		int result = 0;
+		try{
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_COUNT_NICK);
+			psmt.setString(1, nick);
+			rs = psmt.executeQuery();
 			
-			rs.close();
-			psmt.close();
-			conn.close();
+			if(rs.next()){
+				result = rs.getInt(1);
+			}
+			close();			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return result;
+	}
+	public int selectCountHp(String hp) {
+		int result = 0;
+		try{
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_COUNT_HP);
+			psmt.setString(1, hp);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()){
+				result = rs.getInt(1);
+			}
+			
+			close();
 			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		return result;
 	}
-	public int selectCountNick() {
-		
-		return 0;
+	public int selectCountEmail(String email) {
+		int result = 0;
+		try{
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_COUNT_EMAIL);
+			psmt.setString(1, email);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()){
+				result = rs.getInt(1);
+			}
+			close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return result;
 	}
-	public int selectCountHp() {
-		
-		return 0;
-	}
-	public int selectCountEmail() {
-		
-		return 0;
+	public TermsVO selectTerms() {
+		TermsVO vo = new TermsVO();
+
+		try{
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(SQL.SELECT_TERMS);
+			
+			if(rs.next()){
+				vo.setTerms(rs.getString(1));
+				vo.setPrivacy(rs.getString(2));
+			}
+			close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return vo;
 	}
 	
 	public void selectUsers() {}
