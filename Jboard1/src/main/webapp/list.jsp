@@ -1,6 +1,13 @@
+<%@page import="kr.co.jboard1.vo.ArticleVO"%>
+<%@page import="java.util.List"%>
+<%@page import="kr.co.jboard1.dao.ArticleDAO"%>
 <%@page import="kr.co.jboard1.vo.UserVO"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
+<%
+	ArticleDAO dao = new ArticleDAO();
+	List<ArticleVO> articles = dao.selectArticles();
+%>
 <main>
     <section class="list">
         <h3>글목록</h3>
@@ -13,13 +20,15 @@
                     <th>날짜</th>
                     <th>조회</th>
                 </tr>
+                <% for(ArticleVO article : articles){ %>
                 <tr>
-                    <td>1</td>
-                    <td><a href="#">테스트 제목입니다.</a>&nbsp;[3]</td>
-                    <td>길동이</td>
-                    <td>20-05-12</td>
-                    <td>12</td>
+                    <td><%= article.getNo() %></td>
+                    <td><a href="#"><%= article.getTitle() %></a>&nbsp;[<%= article.getComment() %>]</td>
+                    <td><%= article.getWriter() %></td>
+                    <td><%= article.getRdate() %></td>
+                    <td><%= article.getHit() %></td>
                 </tr>
+                <% } %>
             </table>
         </article>
 
