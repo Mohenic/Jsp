@@ -1,3 +1,5 @@
+<%@page import="kr.co.jboard1.vo.ArticleVO"%>
+<%@page import="kr.co.jboard1.dao.ArticleDAO"%>
 <%@page import="kr.co.jboard1.vo.UserVO"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="kr.co.jboard1.db.SQL"%>
@@ -15,26 +17,29 @@
 	String writer 	= request.getParameter("writer");
 	String regip    = request.getRemoteAddr();
 	
+	ArticleVO vo = new ArticleVO();
+	vo.setTitle(title);
+	vo.setContent(content);
+	vo.setWriter(writer);
+	vo.setRegip(regip);
+	
 	// 데이터베이스 처리
-	try {
-		Context ctx = (Context) new InitialContext().lookup("java:comp/env");
-		DataSource ds = (DataSource) ctx.lookup("jdbc/Jboard");
-		Connection conn = ds.getConnection();
-		
-		PreparedStatement psmt = conn.prepareStatement(SQL.INSERT_ARTICLE);
-		psmt.setString(1, title);
-		psmt.setString(2, content);
-		psmt.setString(3, writer);
-		psmt.setString(4, regip);
-		
-		psmt.executeUpdate();
-		
-		psmt.close();
-		conn.close();
-	}catch(Exception e){
-		e.printStackTrace();
-	}
+	ArticleDAO dao = new ArticleDAO();
+	dao.insertArticle(vo);
 	
 	// 리다이렉트
 	response.sendRedirect("/Jboard1/list.jsp");
 %>
+
+
+
+
+
+
+
+
+
+
+
+
+
