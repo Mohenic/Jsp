@@ -24,5 +24,32 @@ public class SQL {
 	public static final String SELECT_COUNT_HP    = "SELECT COUNT(*) FROM `User` WHERE `hp`=?";
 	public static final String SELECT_TERMS    = "SELECT * FROM `Terms`";
 	
+	// Article
+	public final static String INSERT_ARTICLE = "INSERT INTO `Article` SET "
+												+ "`title`=?, "
+												+ "`content`=?,"
+												+ "`writer`=?,"
+												+ "`regip`=?,"
+												+ "`rdate`=NOW()";
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+			
+	
 	
 }
