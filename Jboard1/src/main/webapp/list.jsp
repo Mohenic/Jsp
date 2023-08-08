@@ -24,7 +24,7 @@
                 <tr>
                     <td><%= article.getNo() %></td>
                     <td><a href="#"><%= article.getTitle() %></a>&nbsp;[<%= article.getComment() %>]</td>
-                    <td><%= article.getWriter() %></td>
+                    <td><%= article.getNick() %></td>
                     <td><%= article.getRdate() %></td>
                     <td><%= article.getHit() %></td>
                 </tr>

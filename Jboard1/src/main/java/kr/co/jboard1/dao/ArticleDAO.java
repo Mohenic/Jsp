@@ -51,6 +51,7 @@ public class ArticleDAO extends DBHelper {
 				vo.setWriter(rs.getString(9));
 				vo.setRegip(rs.getString(10));
 				vo.setRdate(rs.getString(11));
+				vo.setNick(rs.getString(12));
 				
 				articles.add(vo);
 			}
