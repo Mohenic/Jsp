@@ -1,8 +1,6 @@
 package kr.co.jboard1.db;
 
 public class SQL {
-
-	
 	// User
 	public static final String INSERT_USER = "INSERT INTO `User` SET "
 											+ "`uid`=?,"
@@ -17,12 +15,12 @@ public class SQL {
 											+ "`regip`=?,"
 											+ "`regDate`=NOW()";
 	
-	public static final String SELECT_USER = "SELECT * FROM `User` WHERE `uid`=? AND `pass`=SHA2(?, 256)";
+	public static final String SELECT_USER        = "SELECT * FROM `User` WHERE `uid`=? AND `pass`=SHA2(?, 256)";
 	public static final String SELECT_COUNT_UID   = "SELECT COUNT(*) FROM `User` WHERE `uid`=?";
 	public static final String SELECT_COUNT_NICK  = "SELECT COUNT(*) FROM `User` WHERE `nick`=?";
 	public static final String SELECT_COUNT_EMAIL = "SELECT COUNT(*) FROM `User` WHERE `email`=?";
 	public static final String SELECT_COUNT_HP    = "SELECT COUNT(*) FROM `User` WHERE `hp`=?";
-	public static final String SELECT_TERMS    = "SELECT * FROM `Terms`";
+	public static final String SELECT_TERMS       = "SELECT * FROM `Terms`";
 	
 	// Article
 	public final static String INSERT_ARTICLE = "INSERT INTO `Article` SET "
@@ -37,8 +35,10 @@ public class SQL {
 												+ "b.`nick` "
 												+ "FROM `Article` AS a "
 												+ "JOIN `User` AS b ON a.writer = b.uid "
-												+ "ORDER BY `no` DESC";
+												+ "ORDER BY `no` DESC "
+												+ "LIMIT ?, 10";
 	
+	public final static String SELECT_COUNT_TOTAL = "SELECT COUNT(*) FROM `Article`";
 	
 	
 	

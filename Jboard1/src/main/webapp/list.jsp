@@ -5,8 +5,38 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
 <%
+	request.setCharacterEncoding("UTF-8");
+	String pg = request.getParameter("pg");
+
+	
+	
+	// 페이지 관련 변수
+	int currentPage = 1;
+	int total = 0;
+	int lastPageNum = 0;
+	
+	if(pg != null){
+		currentPage = Integer.parseInt(pg);
+	}
+	
+	int start = (currentPage - 1) * 10;
+
+	
 	ArticleDAO dao = new ArticleDAO();
-	List<ArticleVO> articles = dao.selectArticles();
+	
+	// 전체 게시물 갯수 조회
+	total = dao.selectCountTotal();
+	
+	// 페이지 번호 계산
+	if(total % 10 == 0){
+		lastPageNum = (total / 10);
+	}else{
+		lastPageNum = (total / 10) + 1;
+	}
+	
+	
+	// 현재 페이지 게시물 조회
+	List<ArticleVO> articles = dao.selectArticles(start);
 %>
 <main>
     <section class="list">
@@ -35,9 +65,9 @@
         <!-- 페이지 네비게이션 -->
         <div class="paging">
             <a href="#" class="prev">이전</a>
-            <a href="#" class="num current">1</a>                
-            <a href="#" class="num">2</a>                
-            <a href="#" class="num">3</a>                
+            <% for(int i=1 ; i<=lastPageNum ; i++){ %>
+            <a href="/Jboard1/list.jsp?pg=<%= i %>" class="num <%= (currentPage == i)?"current":"" %>"><%= i %></a>
+            <% } %>
             <a href="#" class="next">다음</a>
         </div>
 
