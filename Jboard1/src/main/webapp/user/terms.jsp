@@ -1,5 +1,5 @@
 <%@page import="kr.co.jboard1.dao.UserDAO"%>
-<%@page import="kr.co.jboard1.vo.TermsVO"%>
+<%@page import="kr.co.jboard1.dto.TermsDTO"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
@@ -8,7 +8,7 @@
 <%@page import="javax.naming.Context"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-	TermsVO tv = UserDAO.getInstance().selectTerms();
+TermsDTO dto = UserDAO.getInstance().selectTerms();
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +53,7 @@
                     <caption>사이트 이용약관</caption>
                     <tr>
                         <td>
-                            <textarea readonly><%= tv.getTerms() %></textarea>
+                            <textarea readonly><%= dto.getTerms() %></textarea>
                             <p>
                                 <label><input type="checkbox" name="chk1"/>동의합니다.</label>
                             </p>
@@ -64,7 +64,7 @@
                     <caption>개인정보 취급방침</caption>
                     <tr>
                         <td>
-                            <textarea readonly><%= tv.getPrivacy() %></textarea>
+                            <textarea readonly><%= dto.getPrivacy() %></textarea>
                             <p>
                                 <label><input type="checkbox" name="chk2"/>동의합니다.</label>
                             </p>
