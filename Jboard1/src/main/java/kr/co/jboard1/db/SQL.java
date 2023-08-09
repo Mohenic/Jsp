@@ -43,6 +43,7 @@ public class SQL {
 												+ "b.`nick` "
 												+ "FROM `Article` AS a "
 												+ "JOIN `User` AS b ON a.writer = b.uid "
+												+ "WHERE `parent`=0 "
 												+ "ORDER BY `no` DESC "
 												+ "LIMIT ?, 10";
 	
@@ -53,11 +54,12 @@ public class SQL {
 												+ "JOIN `User` AS b ON a.writer = b.uid "
 												+ "WHERE `parent`=?";
 	
-	public final static String SELECT_COUNT_TOTAL = "SELECT COUNT(*) FROM `Article`";
+	public final static String SELECT_COUNT_TOTAL = "SELECT COUNT(*) FROM `Article` WHERE `parent`=0";
 	
-	public final static String UPDATE_ARTICLE_FOR_COMMENT = "UPDATE `Article` SET `comment` = `comment` + 1 WHERE `no`=?";
+	public final static String UPDATE_ARTICLE_FOR_COMMENT_PLUS = "UPDATE `Article` SET `comment` = `comment` + 1 WHERE `no`=?";
+	public final static String UPDATE_ARTICLE_FOR_COMMENT_MINUS = "UPDATE `Article` SET `comment` = `comment` - 1 WHERE `no`=?";
 	
-	
+	public final static String DELETE_COMMENT = "DELETE FROM `Article` WHERE `no`=?";
 	
 	
 	

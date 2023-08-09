@@ -15,6 +15,20 @@
 	// 댓글 조회
 	List<ArticleDTO> comments = dao.selectComments(no);
 %>
+<script>
+	$(function(){
+		$('.del').click(function(){
+			const result = confirm('정말 삭제 하시겠습니까?');
+			
+			if(result){
+				return true;
+			}else{
+				return false;					
+			}
+		});
+	});
+	
+</script>
 <main>
     <section class="view">
         <h3>글보기</h3>
@@ -55,10 +69,14 @@
                     <span><%= comment.getRdate() %></span>
                 </span>
                 <textarea name="comment" readonly><%= comment.getContent() %></textarea>
+                
+                <% if(sessUser.getUid().equals(comment.getWriter())){ %>
                 <div>
-                    <a href="#">삭제</a>
-                    <a href="#">수정</a>
+                    <a href="/Jboard1/proc/commentDelete.jsp?no=<%= comment.getNo() %>&parent=<%= comment.getParent() %>" class="del">삭제</a>
+                    <a href="#" class="mod">수정</a>
                 </div>
+                <% } %>
+                
             </article>
             <% } %>
             
