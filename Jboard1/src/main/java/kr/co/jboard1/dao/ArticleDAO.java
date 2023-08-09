@@ -25,8 +25,37 @@ public class ArticleDAO extends DBHelper {
 		}
 	}
 	
-	public ArticleDTO selectArticle(int no) {
-		return null;
+	public ArticleDTO selectArticle(String no) {
+		
+		ArticleDTO dto = null;
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_ARTICLE);
+			psmt.setString(1, no);
+			
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				dto = new ArticleDTO();
+				dto.setNo(rs.getInt("no"));
+				dto.setParent(rs.getInt("parent"));
+				dto.setComment(rs.getInt("comment"));
+				dto.setCate(rs.getString("cate"));
+				dto.setTitle(rs.getString("title"));
+				dto.setContent(rs.getString("content"));
+				dto.setFile(rs.getInt("file"));
+				dto.setHit(rs.getInt("hit"));
+				dto.setWriter(rs.getString("writer"));
+				dto.setRegip(rs.getString("regip"));
+				dto.setRdate(rs.getString("rdate"));
+			}
+			close();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return dto;
 	}
 	
 	public List<ArticleDTO> selectArticles(int start) {
