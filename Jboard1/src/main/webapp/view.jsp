@@ -17,6 +17,7 @@
 %>
 <script>
 	$(function(){
+		// 댓글 삭제
 		$('.del').click(function(){
 			const result = confirm('정말 삭제 하시겠습니까?');
 			
@@ -26,6 +27,16 @@
 				return false;					
 			}
 		});
+		
+		// 원글 삭제
+		const btnDelete = document.getElementsByClassName('btnDelete')[0];
+		btnDelete.onclick = function(){
+			if(confirm('정말 삭제 하시겠습니까?')){
+				return true;
+			}else{
+				return false;					
+			}
+		}
 	});
 	
 </script>
@@ -54,7 +65,7 @@
             </tr>
         </table>
         <div>
-            <a href="#" class="btnDelete">삭제</a>
+            <a href="/Jboard1/delete.jsp?no=<%= no %>" class="btnDelete">삭제</a>
             <a href="/Jboard1/modify.jsp?no=<%= no %>" class="btnModify">수정</a>
             <a href="/Jboard1/list.jsp" class="btnList">목록</a>
         </div>  
