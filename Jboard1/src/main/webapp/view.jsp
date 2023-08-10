@@ -55,7 +55,7 @@
         </table>
         <div>
             <a href="#" class="btnDelete">삭제</a>
-            <a href="#" class="btnModify">수정</a>
+            <a href="/Jboard1/modify.jsp?no=<%= no %>" class="btnModify">수정</a>
             <a href="/Jboard1/list.jsp" class="btnList">목록</a>
         </div>  
         

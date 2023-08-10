@@ -6,10 +6,11 @@
 		<title>Insert title here</title>
 	</head>
 	<body>
-		<form action="/Jboard1/test2.jsp" method="get" enctype="application/x-www-form-urlencoded">
+		<form action="/Jboard1/test2.jsp" method="post" enctype="multipart/form-data">
 			<input type="text" name="title">
 			<input type="text" name="name">
 			<input type="text" name="age">
+			<input type="file" name="fname">
 			<input type="submit" value="전송">
 		</form>
 		
