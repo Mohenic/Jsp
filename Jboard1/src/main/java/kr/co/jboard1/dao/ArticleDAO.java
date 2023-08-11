@@ -215,7 +215,6 @@ public class ArticleDAO extends DBHelper {
 		}
 	}
 
-	
 	public void updateComment(String no, String content) {
 		try {
 			conn = getConnection();

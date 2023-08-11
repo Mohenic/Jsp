@@ -17,6 +17,7 @@
 %>
 <script>
 	$(function(){
+		
 		// 댓글 수정
 		$('.mod').click(function(e){
 			e.preventDefault();
@@ -32,8 +33,10 @@
 				$(this).prev().show();
 			}else{
 				// '수정완료' 클릭
-				// 수정 데이터 전송
-				$(this).closest('form').submit();
+				if(confirm('정말 수정 하시겠습니까?')){
+					// 수정 데이터 전송
+					$(this).closest('form').submit();
+				}
 				
 				// 수정모드 해제 
 				$(this).parent().prev().removeClass('modi');
@@ -42,6 +45,19 @@
 				$(this).prev().hide();
 			}
 		});
+		
+		// 댓글 수정 취소
+		/*
+		$('.can').click(function(e){
+			e.preventDefault();
+			
+			// 수정모드 해제 
+			$(this).parent().prev().removeClass('modi');
+			$(this).parent().prev().attr('readonly', true);			
+			$(this).hide();
+			$(this).next().text('수정');
+		});
+		*/
 		
 		// 댓글 삭제
 		$('.del').click(function(){
@@ -130,7 +146,7 @@
 	                <% if(sessUser.getUid().equals(comment.getWriter())){ %>
 	                <div>
 	                    <a href="/Jboard1/proc/commentDelete.jsp?no=<%= comment.getNo() %>&parent=<%= comment.getParent() %>" class="del">삭제</a>
-	                    <a href="#" class="can">취소</a>
+	                    <a href="/Jboard1/view.jsp?no=<%= no %>" class="can">취소</a>
 	                    <a href="#" class="mod">수정</a>
 	                </div>                
                 	<% } %>
@@ -146,7 +162,7 @@
         <!-- 댓글입력폼 -->
         <section class="commentForm">
             <h3>댓글쓰기</h3>
-            <form action="/Jboard1/proc/commentProc.jsp" method="post">
+            <form action="/Jboard1/proc/commentInsert.jsp" method="post">
             	<input type="hidden" name="parent" value="<%= no %>"/>
             	<input type="hidden" name="writer" value="<%= sessUser.getUid() %>"/>
                 <textarea name="content"></textarea>
