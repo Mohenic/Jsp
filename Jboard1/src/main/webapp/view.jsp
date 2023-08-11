@@ -24,13 +24,14 @@
 			const txt = $(this).text();
 			
 			if(txt == '수정'){
+				// 수정모드 전환
 				$(this).parent().prev().addClass('modi');
 				$(this).parent().prev().attr('readonly', false);
 				$(this).parent().prev().focus();
 				$(this).text('수정완료');
 				$(this).prev().show();
 			}else{
-				// 수정완료 클릭
+				// '수정완료' 클릭
 				// 수정 데이터 전송
 				$(this).closest('form').submit();
 				
@@ -118,6 +119,8 @@
             <% for(ArticleDTO comment : comments){ %>
             <article class="comment">
             	<form action="/Jboard1/proc/commentUpdate.jsp" method="post">
+            		<input type="hidden" name="no"     value="<%= comment.getNo() %>">
+            		<input type="hidden" name="parent" value="<%= comment.getParent() %>">
 	                <span>
 	                    <span><%= comment.getNick() %></span>
 	                    <span><%= comment.getRdate() %></span>
