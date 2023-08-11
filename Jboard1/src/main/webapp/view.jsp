@@ -16,7 +16,10 @@
 	List<ArticleDTO> comments = dao.selectComments(no);
 %>
 <script>
+
 	$(function(){
+		
+		let comment = '';
 		
 		// 댓글 수정
 		$('.mod').click(function(e){
@@ -25,6 +28,8 @@
 			const txt = $(this).text();
 			
 			if(txt == '수정'){
+				comment = $(this).parent().prev().val();
+				
 				// 수정모드 전환
 				$(this).parent().prev().addClass('modi');
 				$(this).parent().prev().attr('readonly', false);
@@ -36,6 +41,8 @@
 				if(confirm('정말 수정 하시겠습니까?')){
 					// 수정 데이터 전송
 					$(this).closest('form').submit();
+				}else{
+					$(this).parent().prev().val(comment);
 				}
 				
 				// 수정모드 해제 
