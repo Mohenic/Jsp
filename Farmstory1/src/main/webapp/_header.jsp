@@ -1,4 +1,8 @@
+<%@page import="kr.farmstory1.dto.UserDTO"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	UserDTO sessUser = (UserDTO) session.getAttribute("sessUser");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,9 +34,15 @@
             <a href="/Farmstory1" class="logo"><img src="/Farmstory1/images/logo.png" alt="로고"/></a>
             <p>
                 <a href="/Farmstory1/index.jsp">HOME |</a>
+                <% if(sessUser == null){ %>
                 <a href="/Farmstory1/user/login.jsp">로그인 |</a>
                 <a href="/Farmstory1/user/terms.jsp">회원가입 |</a>
-                <a href="/Farmstory1/admin/">관리자 |</a>
+                <% }else{ %>
+                <a href="/Farmstory1/user/logout.jsp">로그아웃 |</a>
+                	<% if(!sessUser.getRole().equals("USER")){ %>
+                	<a href="/Farmstory1/admin/">관리자 |</a>
+                	<% } %>
+                <% } %>
                 <a href="#">고객센터</a>
             </p>
             <img src="/Farmstory1/images/head_txt_img.png" alt="3만원 이상 무료배송"/>
