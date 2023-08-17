@@ -59,14 +59,15 @@ public class ArticleDAO extends DBHelper {
 		return dto;
 	}
 	
-	public List<ArticleDTO> selectArticles(int start) {
+	public List<ArticleDTO> selectArticles(String cate, int start) {
 		
 		List<ArticleDTO> articles = new ArrayList<>();
 		
 		try {
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.SELECT_ARTICLES);
-			psmt.setInt(1, start);
+			psmt.setString(1, cate);
+			psmt.setInt(2, start);
 			rs = psmt.executeQuery();
 			
 			while(rs.next()) {
@@ -121,13 +122,14 @@ public class ArticleDAO extends DBHelper {
 	}
 
 	// 추가 
-	public int selectCountTotal() {
+	public int selectCountTotal(String cate) {
 		
 		int total = 0;
 		
 		try {
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.SELECT_COUNT_TOTAL);
+			psmt.setString(1, cate);
 			rs = psmt.executeQuery();
 			if(rs.next()) {
 				total = rs.getInt(1);
