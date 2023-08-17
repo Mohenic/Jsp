@@ -72,7 +72,6 @@
     </section>
 </section>
 <!-- 내용 끝 -->
-
         </article>
     </section>
 </div>			
