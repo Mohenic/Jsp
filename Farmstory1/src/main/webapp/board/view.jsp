@@ -1,4 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../_header.jsp" %>
+<%
+	request.setCharacterEncoding("UTF-8");
+	String group = request.getParameter("group");
+	String cate  = request.getParameter("cate");
+	
+	pageContext.include("./_aside"+group+".jsp");
+%>
 <section class="view">
     <h3>글보기</h3>
     <table>
@@ -22,7 +30,7 @@
     </table>
     <div>
         <a href="#" class="btnDelete">삭제</a>
-        <a href="#" class="btnModify">수정</a>
+        <a href="./modify.jsp?group=<%= group %>&cate=<%= cate %>" class="btnModify">수정</a>
         <a href="#" class="btnList">목록</a>
     </div>
     
@@ -63,3 +71,9 @@
         </form>
     </section>
 </section>
+<!-- 내용 끝 -->
+
+        </article>
+    </section>
+</div>			
+<%@ include file="../_footer.jsp" %>

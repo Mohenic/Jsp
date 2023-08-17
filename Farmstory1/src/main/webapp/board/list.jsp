@@ -3,9 +3,11 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String group = request.getParameter("group");
+	String cate  = request.getParameter("cate");
 	
 	pageContext.include("./_aside"+group+".jsp");
 %>
+
 			<section class="list">
 			    <h3>글목록</h3>
 			    <article>
@@ -19,7 +21,7 @@
 			            </tr>
 			            <tr>
 			                <td>1</td>
-			                <td><a href="#">제목입니다.</a>&nbsp;[3]</td>
+			                <td><a href="./view.jsp?group=<%= group %>&cate=<%= cate %>">제목입니다.</a>&nbsp;[3]</td>
 			                <td>별명</td>
 			                <td>23-08-17</td>
 			                <td>12</td>
@@ -35,7 +37,7 @@
 			    </div>
 			
 			    <!-- 글쓰기 버튼 -->
-			    <a href="#" class="btnWrite">글쓰기</a>
+			    <a href="./write.jsp?group=<%= group %>&cate=<%= cate %>" class="btnWrite">글쓰기</a>
 			</section>
 			<!-- 내용 끝 -->
 
