@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="kr.farmstory1.dto.ArticleDTO"%>
 <%@page import="kr.farmstory1.dao.ArticleDAO"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
@@ -16,7 +17,9 @@
 	
 	// 데이터베이스 조회
 	ArticleDAO dao = new ArticleDAO();
+	
 	ArticleDTO dto = dao.selectArticle(no);
+	List<ArticleDTO> comments = dao.selectComments(no);
 	
 	pageContext.include("./_aside"+group+".jsp");
 %>
@@ -52,24 +55,31 @@
     <!-- 댓글리스트 -->
     <section class="commentList">
         <h3>댓글목록</h3>
+        <% for(ArticleDTO comment : comments){ %>
         <article class="comment">
         	<form action="#" method="post">
         		<input type="hidden" name="no"     value="">
         		<input type="hidden" name="parent" value="">
-             <span>
-                 <span></span>
-                 <span></span>
-             </span>
-             <textarea name="comment" readonly></textarea>
+	             <span>
+	                 <span><%= comment.getNick() %></span>
+	                 <span><%= comment.getRdate() %></span>
+	             </span>
+	             <textarea name="comment" readonly><%= comment.getContent() %></textarea>
              
-             <div>
-                 <a href="#" class="del">삭제</a>
-                 <a href="#" class="can">취소</a>
-                 <a href="#" class="mod">수정</a>
-             </div>                
+	             <% if(sessUser.getUid().equals(comment.getWriter())){ %>
+	             <div>
+	                 <a href="#" class="del">삭제</a>
+	                 <a href="#" class="can">취소</a>
+	                 <a href="#" class="mod">수정</a>
+	             </div>                
+            	<% } %>
             </form>
         </article>
+        <% } %>
+        
+        <% if(comments.isEmpty()){ %>
         <p class="empty">등록된 댓글이 없습니다.</p>
+        <% } %>
     </section>
 
     <!-- 댓글입력폼 -->
