@@ -48,7 +48,7 @@
     </table>
     <div>
         <a href="#" class="btnDelete">삭제</a>
-        <a href="./modify.jsp?group=<%= group %>&cate=<%= cate %>" class="btnModify">수정</a>
+        <a href="./modify.jsp?group=<%= group %>&cate=<%= cate %>&no=<%= no %>" class="btnModify">수정</a>
         <a href="./list.jsp?group=<%= group %>&cate=<%= cate %>" class="btnList">목록</a>
     </div>
     
@@ -60,18 +60,18 @@
         	<form action="#" method="post">
         		<input type="hidden" name="no"     value="">
         		<input type="hidden" name="parent" value="">
-	             <span>
-	                 <span><%= comment.getNick() %></span>
-	                 <span><%= comment.getRdate() %></span>
-	             </span>
-	             <textarea name="comment" readonly><%= comment.getContent() %></textarea>
+				<span>
+					<span><%= comment.getNick() %></span>
+					<span><%= comment.getRdate() %></span>
+				</span>
+				<textarea name="comment" readonly><%= comment.getContent() %></textarea>
              
-	             <% if(sessUser.getUid().equals(comment.getWriter())){ %>
-	             <div>
-	                 <a href="#" class="del">삭제</a>
-	                 <a href="#" class="can">취소</a>
-	                 <a href="#" class="mod">수정</a>
-	             </div>                
+				<% if(sessUser.getUid().equals(comment.getWriter())){ %>
+				<div>
+					<a href="#" class="del">삭제</a>
+					<a href="#" class="can">취소</a>
+					<a href="#" class="mod">수정</a>
+				</div>                
             	<% } %>
             </form>
         </article>
