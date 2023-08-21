@@ -18,11 +18,11 @@
 		
 	// Gmail SMTP 서버 설정
 	Properties props = new Properties();
-	props.put("mail.smtp.host", "stmt.gmail.com");
+	props.put("mail.smtp.host", "smtp.gmail.com");
 	props.put("mail.smtp.port", "465");
 	props.put("mail.smtp.auth", "true");
 	props.put("mail.smtp.ssl.enable", "true");
-	props.put("mail.smtp.ssl.trust", "stmt.gmail.com");
+	props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
 	
 	// Gmail STMP 세션 생성
 	Session gmailSession = Session.getInstance(props, new Authenticator(){
