@@ -51,6 +51,8 @@
 	String path = application.getRealPath("/upload");
 	File file = new File(path+"/"+dto.getsName());
 	
+	out.clear();
+	
 	BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
 	BufferedOutputStream bos = new BufferedOutputStream(response.getOutputStream());
 			
