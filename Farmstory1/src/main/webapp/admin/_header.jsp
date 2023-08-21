@@ -1,4 +1,13 @@
+<%@page import="kr.farmstory1.dto.UserDTO"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+	UserDTO sessUser = (UserDTO) session.getAttribute("sessUser");
+	
+	if(sessUser == null){
+		response.sendRedirect("/Farmstory1/user/login.jsp?success=101");
+		return;
+	}
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
