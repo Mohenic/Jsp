@@ -57,7 +57,17 @@ public class ArticleDTO {
 		return title;
 	}
 	public void setTitle(String title) {
-		this.title = title;
+		
+		String escapedStr1 = title.replaceAll("<br>", "\n");
+		String escapedStr2 = escapedStr1.replaceAll("&gt;", ">");
+		String escapedStr3 = escapedStr2.replaceAll("&lt;", "<");
+		String escapedStr4 = escapedStr3.replaceAll("&quot;", "\"");
+		String escapedStr5 = escapedStr4.replaceAll("&nbsp;", " ");
+		String escapedStr6 = escapedStr5.replaceAll("&amp;", "&");
+		
+		System.out.println("escapedStr6 : " + escapedStr6);
+		
+		this.title = escapedStr6;
 	}
 	public String getContent() {
 		return content;
