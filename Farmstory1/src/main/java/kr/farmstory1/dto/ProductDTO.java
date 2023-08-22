@@ -128,7 +128,7 @@ public class ProductDTO {
 		this.etc = etc;
 	}
 	public String getRdate() {
-		return rdate;
+		return rdate.substring(0, 10);
 	}
 	public void setRdate(String rdate) {
 		this.rdate = rdate;
