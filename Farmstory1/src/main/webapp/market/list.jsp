@@ -98,7 +98,6 @@
                 </tr>
                 <% } %>
             </table>
-
             <div class="paging">
 	        	<% if(pageGroupStart > 1){ %>
 	            <a href="./list.jsp?type=<%= type %>&pg=<%= pageGroupStart - 1 %>" class="prev">이전</a>
@@ -112,9 +111,7 @@
 	            <a href="./list.jsp?type=<%= type %>&pg=<%= pageGroupEnd + 1 %>" class="next">다음</a>
 	            <% } %>
 	        </div>
-
             <!-- 내용 끝 -->
-
         </article>
     </section>
 </div>
