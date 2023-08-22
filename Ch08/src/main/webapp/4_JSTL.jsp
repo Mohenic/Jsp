@@ -61,8 +61,13 @@
 				out.print("<p>person : "+person+"</p>");
 			}
 			
-			
 			// 자주 쓰는 문자열 처리
+			String hello = "Hello Korea";
+			
+			out.print("<p>문자열 길이 : "+hello.length()+"</p>");
+			out.print("<p>문자열 자르기 : "+hello.substring(6, 11)+"</p>");
+			out.print("<p>문자열 교체 : "+hello.replace("Korea", "Busan")+"</p>");
+			out.print("<p>문자열 인덱스 : "+hello.indexOf("e")+"</p>");
 		%>
 		
 		<h4>JSTL</h4>
@@ -117,6 +122,12 @@
 		</c:forEach>
 		
 		<!-- 자주 쓰는 문자열 처리 -->
+		<c:set var="hello" value="Hello Korea"/>
+		<p>문자열 길이 : ${f:length(hello)}</p>
+		<p>문자열 자르기 : ${f:substring(hello, 6, 11)}</p>
+		<p>문자열 교체 : ${f:replace(hello, "Korea", "Busan")}</p>
+		<p>문자열 인덱스 : ${f:indexOf(hello, "e")}</p>		
+		
 	</body>
 </html>
 
