@@ -1,5 +1,6 @@
 package kr.farmstory1.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import kr.farmstory1.db.DBHelper;
@@ -35,8 +36,37 @@ public class ProductDAO extends DBHelper {
 	}
 	
 	public List<ProductDTO> selectProducts() {
-		return null;
+		
+		List<ProductDTO> products = new ArrayList<>();
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_PRODUCTS);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ProductDTO dto = new ProductDTO();
+				dto.setpNo(rs.getInt(1));
+				dto.setType(rs.getInt(2));
+				dto.setpName(rs.getString(3));
+				dto.setPrice(rs.getInt(4));
+				dto.setDelivery(rs.getInt(5));
+				dto.setStock(rs.getInt(6));
+				dto.setSold(rs.getInt(7));
+				dto.setThumb1(rs.getString(8));
+				dto.setThumb2(rs.getString(9));
+				dto.setThumb3(rs.getString(10));
+				dto.setSeller(rs.getString(11));
+				dto.setEtc(rs.getString(12));
+				dto.setRdate(rs.getString(13));
+				products.add(dto);
+			}
+			close();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return products;
 	}
+	
 	public void updateProduct(ProductDTO dto) {}
 	public void deleteProduct(int pNo) {}
 }

@@ -86,6 +86,8 @@ public class SQL {
 												+ "`etc`=?,"
 												+ "`rdate`=NOW()";
 	
+	public final static String SELECT_PRODUCTS = "SELECT * FROM `Product` WHERE `stock` > 0";
+	
 	
 	
 }
