@@ -574,6 +574,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 #sub > .market > .order > .info > img {
     float: left;
+	width: 240px;
 }
 #sub > .market > .order > .info > table {
     float: right;

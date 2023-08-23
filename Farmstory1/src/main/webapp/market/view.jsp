@@ -11,7 +11,8 @@
 %>
 <script>
 	
-	const price = <%= dto.getPrice() %>;
+	const price    = <%= dto.getPrice() %>;
+	const delivery = <%= dto.getDelivery() %>;
 	
 	$(function(){
 		
@@ -19,9 +20,11 @@
 			
 			let count = $(this).val();
 			let total = price * count;
+			let finalPrice = total + delivery; 
 			
 			$('input[name=count]').val(count);
 			$('input[name=total]').val(total);
+			$('input[name=final]').val(finalPrice);
 			
 			$('.total').text(total.toLocaleString()+'원');
 		});
@@ -96,12 +99,14 @@
                     </tr>
                 </table>
                 <form id="formOrder" action="/Farmstory1/market/order.jsp" method="post">
+                	<input type="hidden" name="thumb2"   value="<%= dto.getThumb2() %>">
                 	<input type="hidden" name="pName"    value="<%= dto.getpName() %>">
                 	<input type="hidden" name="pNo"      value="<%= dto.getpNo() %>">
                 	<input type="hidden" name="delivery" value="<%= dto.getDelivery() %>">
                 	<input type="hidden" name="price"    value="<%= dto.getPrice() %>">
                 	<input type="hidden" name="count"    value="1">
                 	<input type="hidden" name="total"    value="<%= dto.getPrice() %>">                
+                	<input type="hidden" name="final"    value="<%= dto.getPrice() + dto.getDelivery() %>">                
                 </form>
                 <a href="#" class="btnOrder">
                     <img src="../images/market_btn_order.gif" alt="바로 구매하기"/>

@@ -1,5 +1,28 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../_header.jsp" %>
+<%
+	// 로그인 여부 확인
+	if(sessUser == null){
+		response.sendRedirect("/Farmstory1/user/login.jsp?success=101");
+		return;
+	}
+
+	request.setCharacterEncoding("UTF-8");
+	String thumb2   = request.getParameter("thumb2");
+	String pName    = request.getParameter("pName");
+	String pNo      = request.getParameter("pNo");
+	String delivery = request.getParameter("delivery");
+	String price    = request.getParameter("price");
+	String count    = request.getParameter("count");
+	String total    = request.getParameter("total");
+	String finalPrice    = request.getParameter("final");
+	
+	
+	
+
+%>
+
+
 <div id="sub">
     <div><img src="../images/sub_top_tit2.png" alt="MARKET"></div>
     <section class="market">
@@ -21,32 +44,32 @@
             <!-- 내용 시작 -->
             <h3>주문상품 확인</h3>
             <div class="info">
-                <img src="../images/market_item_thumb.jpg" alt="딸기 500g">
+                <img src="/Farmstory1/thumb/<%= thumb2 %>" alt="<%= pName %>">
 
                 <table border="0">                            
                     <tr>
                         <td>상품명</td>
-                        <td>딸기 500g</td>
+                        <td><%= pName %></td>
                     </tr>
                     <tr>
                         <td>상품코드</td>
-                        <td>01</td>
+                        <td><%= pNo %></td>
                     </tr>
                     <tr>
                         <td>배송비</td>
-                        <td class="delivery">5,0000원</td>
+                        <td class="delivery"><%= delivery %>원</td>
                     </tr>
                     <tr>
                         <td>판매가격</td>
-                        <td>4,000원</td>
+                        <td><%= price %>원</td>
                     </tr>
                     <tr>
                         <td>구매수량</td>
-                        <td class="count">1개</td>
+                        <td class="count"><%= count %>개</td>
                     </tr>
                     <tr>
-                        <td>합계</td>
-                        <td class="total">4,000원</td>
+                        <td>최종합계</td>
+                        <td class="total"><%= finalPrice %>원</td>
                     </tr>
                 </table>
             </div>
