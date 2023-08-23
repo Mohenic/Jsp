@@ -52,8 +52,6 @@
   <listener>
   	<listener-class>sub3.MyContextListener</listener-class>
   </listener>
-  
-  
 </web-app>
 
 

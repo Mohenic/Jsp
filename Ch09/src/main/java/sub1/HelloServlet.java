@@ -54,7 +54,6 @@ public class HelloServlet extends HttpServlet {
 		// 현재 세션 가져오기
 		HttpSession session = req.getSession();
 		
-		
 		if(uid.equals("a101") && pass.equals("1234")) {
 			// 사용자가 a101라고 가정하고 로그인 처리
 			session.setAttribute("sessUid", uid);

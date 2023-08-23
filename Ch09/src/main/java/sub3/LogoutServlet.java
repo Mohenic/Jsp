@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @WebServlet("/logout.do")
-public class Logout extends HttpServlet {
+public class LogoutServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -19,7 +19,6 @@ public class Logout extends HttpServlet {
 		session.invalidate();
 		
 		resp.sendRedirect("/Ch09/3_Listener.jsp?success=201");
-		
 	}
 	
 }
