@@ -17,16 +17,20 @@
 		
 		$('input[name=count]').change(function(){
 			
-			let cnt = $(this).val();
-			let total = price * cnt;
+			let count = $(this).val();
+			let total = price * count;
+			
+			$('input[name=count]').val(count);
+			$('input[name=total]').val(total);
 			
 			$('.total').text(total.toLocaleString()+'원');
-			
-			console.log('total : ' + total);
-			
-			
 		});
 		
+		// 주문하기
+		$('.btnOrder').click(function(e){
+			e.preventDefault();
+			$('#formOrder').submit();
+		});
 		
 	});
 
@@ -91,10 +95,17 @@
                         <td class="total"><%= dto.getPriceWithComma() %>원</td>
                     </tr>
                 </table>
-                <a href="./order.jsp" class="btnOrder">
+                <form id="formOrder" action="/Farmstory1/market/order.jsp" method="post">
+                	<input type="hidden" name="pName"    value="<%= dto.getpName() %>">
+                	<input type="hidden" name="pNo"      value="<%= dto.getpNo() %>">
+                	<input type="hidden" name="delivery" value="<%= dto.getDelivery() %>">
+                	<input type="hidden" name="price"    value="<%= dto.getPrice() %>">
+                	<input type="hidden" name="count"    value="1">
+                	<input type="hidden" name="total"    value="<%= dto.getPrice() %>">                
+                </form>
+                <a href="#" class="btnOrder">
                     <img src="../images/market_btn_order.gif" alt="바로 구매하기"/>
                 </a>
-                
             </div>
             <h3>상품설명</h3>
             <div class="detail">
