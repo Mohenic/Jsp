@@ -1,5 +1,38 @@
+<%@page import="kr.farmstory1.dto.ProductDTO"%>
+<%@page import="kr.farmstory1.dao.ProductDAO"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../_header.jsp" %>
+<%
+	request.setCharacterEncoding("UTF-8");
+	String pNo = request.getParameter("pNo");
+	
+	ProductDAO dao = new ProductDAO();
+	ProductDTO dto = dao.selectProduct(pNo);
+%>
+<script>
+	
+	const price = <%= dto.getPrice() %>;
+	
+	$(function(){
+		
+		$('input[name=count]').change(function(){
+			
+			let cnt = $(this).val();
+			let total = price * cnt;
+			
+			$('.total').text(total.toLocaleString()+'원');
+			
+			console.log('total : ' + total);
+			
+			
+		});
+		
+		
+	});
+
+
+</script>
+
 <div id="sub">
     <div><img src="../images/sub_top_tit2.png" alt="MARKET"></div>
     <section class="market">
@@ -21,27 +54,31 @@
             <!-- 내용 시작 -->
             <h3>기본정보</h3>
             <div class="basic">
-                <img src="../images/market_item_thumb.jpg" alt="딸기 500g">
+                <img src="/Farmstory1/thumb/<%= dto.getThumb2() %>" alt="<%= dto.getpName() %>">
 
                 <table border="0">                            
                     <tr>
                         <td>상품명</td>
-                        <td>딸기 500g</td>
+                        <td><%= dto.getpName() %></td>
                     </tr>
                     <tr>
                         <td>상품코드</td>
-                        <td>01</td>
+                        <td><%= dto.getpNo() %></td>
                     </tr>
                     <tr>
                         <td>배송비</td>
                         <td>
-                            <span>5,000</span>원
+                        	<%if(dto.getDelivery() > 0){ %>
+                            <span><%= dto.getDelivery() %></span>원
                             <em>3만원 이상 무료배송</em>
+                            <%}else{ %>
+                            <span>배송비 무료</span>
+                            <% } %>
                         </td>
                     </tr>
                     <tr>
                         <td>판매가격</td>
-                        <td>4,000원</td>
+                        <td><%= dto.getPriceWithComma() %>원</td>
                     </tr>
                     <tr>
                         <td>구매수량</td>
@@ -51,19 +88,17 @@
                     </tr>
                     <tr>
                         <td>합계</td>
-                        <td class="total">4,000원</td>
+                        <td class="total"><%= dto.getPriceWithComma() %>원</td>
                     </tr>
-
-                    <a href="./order.jsp" class="btnOrder">
-                        <img src="../images/market_btn_order.gif" alt="바로 구매하기"/>
-                    </a>
-
                 </table>
+                <a href="./order.jsp" class="btnOrder">
+                    <img src="../images/market_btn_order.gif" alt="바로 구매하기"/>
+                </a>
+                
             </div>
             <h3>상품설명</h3>
             <div class="detail">
-                <img src="../images/market_detail_sample.jpg" alt="">
-
+                <img src="/Farmstory1/thumb/<%= dto.getThumb3() %>" alt="상세 이미지">
             </div>
 
             <h3>배송정보</h3>

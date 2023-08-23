@@ -495,12 +495,14 @@ main > .info > div > .account {
 
 #sub > .market > .view > .basic {
     width: 100%;
-    height: 270px;
+    height: 300px;
     position: relative;
     overflow: hidden;
 }
 #sub > .market > .view > .basic > img {
     float: left;
+    width: 240px;
+    height: 240px;
 }
 #sub > .market > .view > .basic > table {
     float: right;
@@ -525,8 +527,7 @@ main > .info > div > .account {
     bottom: 0;
 }
 
-
-#sub > .market > .view > .detail {}
+#sub > .market > .view > .detail > img {width: 760px;}
 #sub > .market > .view > .delivery {}
 #sub > .market > .view > .exchange table {
     width: 100%;
