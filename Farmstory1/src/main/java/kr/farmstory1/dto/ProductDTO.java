@@ -54,10 +54,6 @@ public class ProductDTO {
 	public int getPrice() {
 		return price;
 	}
-	public String getPriceWithComma() {
-		DecimalFormat df = new DecimalFormat("###,###");
-		return df.format(price);
-	}
 	public void setPrice(int price) {
 		this.price = price;
 	}

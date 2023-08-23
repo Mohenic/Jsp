@@ -1,3 +1,4 @@
+<%@page import="kr.farmstory1.db.Utils"%>
 <%@page import="kr.farmstory1.dto.ProductDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="kr.farmstory1.dao.ProductDAO"%>
@@ -83,7 +84,7 @@
                     		}
                     	%>
                     </td>
-                    <td><%= product.getPriceWithComma() %>원</td>
+                    <td><%= Utils.comma(product.getPrice()) %>원</td>
                     <td><%= product.getStock() %></td>
                     <td><%= product.getRdate() %></td>
                 </tr>

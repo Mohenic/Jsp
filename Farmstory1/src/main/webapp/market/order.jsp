@@ -1,3 +1,5 @@
+<%@page import="kr.farmstory1.db.Utils"%>
+<%@page import="java.text.DecimalFormat"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../_header.jsp" %>
 <%
@@ -16,13 +18,24 @@
 	String count    = request.getParameter("count");
 	String total    = request.getParameter("total");
 	String finalPrice    = request.getParameter("final");
-	
-	
-	
-
 %>
-
-
+<script>
+	$(function(){
+		
+		$('#btnBuy').click(function(e){
+			e.preventDefault();
+			$('#formOrder').submit();
+		});
+		
+		$('#btnShopping').click(function(e){
+			e.preventDefault();
+			
+			if(confirm("주문을 취소하시겠습니까?")){
+				location.href='/Farmstory1/market/list.jsp';
+			}
+		});
+	});
+</script>
 <div id="sub">
     <div><img src="../images/sub_top_tit2.png" alt="MARKET"></div>
     <section class="market">
@@ -57,11 +70,11 @@
                     </tr>
                     <tr>
                         <td>배송비</td>
-                        <td class="delivery"><%= delivery %>원</td>
+                        <td class="delivery"><%= Utils.comma(delivery) %>원</td>
                     </tr>
                     <tr>
                         <td>판매가격</td>
-                        <td><%= price %>원</td>
+                        <td><%= Utils.comma(price) %>원</td>
                     </tr>
                     <tr>
                         <td>구매수량</td>
@@ -69,36 +82,46 @@
                     </tr>
                     <tr>
                         <td>최종합계</td>
-                        <td class="total"><%= finalPrice %>원</td>
+                        <td class="total"><%= Utils.comma(finalPrice) %>원</td>
                     </tr>
                 </table>
             </div>
             <h3>주문정보 입력</h3>
             <div class="shipping">
-                <table>
-                    <tr>
-                        <td>받는분</td>
-                        <td><input type="text" name="receiver"></td>
-                    </tr>
-                    <tr>
-                        <td>휴대폰</td>
-                        <td><input type="text" name="hp"></td>
-                    </tr>
-                    <tr>
-                        <td>배송주소</td>
-                        <td>
-                            <input type="text" name="zip" readonly><button id="btnZip">우편번호 검색</button>
-                            <input type="text" name="addr1" placeholder="기본주소 검색">
-                            <input type="text" name="addr2" placeholder="상세주소 입력">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>기타</td>
-                        <td>
-                            <textarea name="etc"></textarea>
-                        </td>
-                    </tr>
-                </table>
+            	<form id="formOrder" action="/Farmstory1/market/proc/orderProc.jsp" method="post">
+	                <input type="text" name="orderProduct" value="<%= pNo %>"/>
+	                <input type="text" name="orderCount" value="<%= count %>"/>
+	                <input type="text" name="orderDelivery" value="<%= delivery %>"/>
+	                <input type="text" name="orderPrice" value="<%= price %>"/>
+	                <input type="text" name="orderTotal" value="<%= finalPrice %>"/>
+	                <input type="text" name="orderUser" value="<%= sessUser.getUid() %>"/>
+	                <input type="text" name="orderProduct" value="<%= pNo %>"/>
+	                
+	                <table>
+	                    <tr>
+	                        <td>받는분</td>
+	                        <td><input type="text" name="receiver" value="<%= sessUser.getName() %>"></td>
+	                    </tr>
+	                    <tr>
+	                        <td>휴대폰</td>
+	                        <td><input type="text" name="hp" value="<%= sessUser.getHp() %>"></td>
+	                    </tr>
+	                    <tr>
+	                        <td>배송주소</td>
+	                        <td>
+	                            <input type="text" name="zip" readonly value="<%= sessUser.getZip() %>"><button id="btnZip">우편번호 검색</button>
+	                            <input type="text" name="addr1" placeholder="기본주소 검색" value="<%= sessUser.getAddr1() %>">
+	                            <input type="text" name="addr2" placeholder="상세주소 입력" value="<%= sessUser.getAddr2() %>">
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <td>기타</td>
+	                        <td>
+	                            <textarea name="etc"></textarea>
+	                        </td>
+	                    </tr>
+	                </table>
+                </form>
             </div>
 
             <p>
