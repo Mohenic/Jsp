@@ -37,13 +37,15 @@ public class OrderDAO extends DBHelper {
 		return null;
 	}
 	
-	public List<OrderDTO> selectOrders() {
+	public List<OrderDTO> selectOrders(int start) {
 		
 		List<OrderDTO> orders = new ArrayList<OrderDTO>();
 		
 		try {
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.SELECT_ORDERS);
+			psmt.setInt(1, start);
+			
 			rs = psmt.executeQuery();
 			
 			while(rs.next()) {
@@ -62,6 +64,8 @@ public class OrderDAO extends DBHelper {
 				order.setOrderEtc(rs.getString(12));
 				order.setOrderUser(rs.getString(13));
 				order.setOrderDate(rs.getString(14));
+				order.setpName(rs.getString(15));
+				order.setThumb1(rs.getString(16));
 				orders.add(order);
 			}
 			close();
@@ -78,5 +82,25 @@ public class OrderDAO extends DBHelper {
 	
 	public void deleteOrder(int orderNo) {
 		
+	}
+	
+	
+	public int selectCountOrders() {
+		int total = 0;
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_COUNT_ORDERS);
+			rs = psmt.executeQuery();
+			
+			if(rs.next()) {
+				total = rs.getInt(1);
+			}
+			close();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return total;
 	}
 }
