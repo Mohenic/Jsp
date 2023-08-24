@@ -75,7 +75,7 @@
                 <tr>
                     <td><input type="checkbox" name=""/></td>
                     <td><%= order.getOrderNo() %></td>
-                    <td><%= order.getpName() %></td>                            
+                    <td><%= Utils.ellipsis(order.getpName(), 5) %></td>                            
                     <td><%= Utils.comma(order.getOrderPrice()) %>원</td>
                     <td><%= order.getOrderCount() %></td>
                     <td><%= Utils.comma(order.getOrderDelivery()) %>원</td>

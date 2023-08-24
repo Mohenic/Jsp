@@ -22,9 +22,6 @@ public class OrderDTO {
 	private String thumb1;
 	
 	public String getpName() {
-		return pName.substring(0, 4)+"...";
-	}
-	public String getpNameFull() {
 		return pName;
 	}
 	public void setpName(String pName) {
