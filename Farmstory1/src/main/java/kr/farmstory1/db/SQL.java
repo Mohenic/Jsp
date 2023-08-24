@@ -109,6 +109,8 @@ public class SQL {
 											+ "`orderUser`=?,"
 											+ "`orderDate`=NOW()";
 	
+	public static final String SELECT_ORDERS = "SELECT * FROM `Order`";
+	
 }
 
 

@@ -1,5 +1,12 @@
+<%@page import="kr.farmstory1.dto.OrderDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="kr.farmstory1.dao.OrderDAO"%>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
+<%
+	OrderDAO dao = new OrderDAO();
+	List<OrderDTO> orders = dao.selectOrders();
+%>
 <main>
     <%@ include file="./_aside.jsp" %>
     <section id="orderList">
@@ -22,18 +29,20 @@
                     <th>주문일</th>
                     <th>확인</th>
                 </tr>
+                <% for(OrderDTO order : orders){ %>
                 <tr>
                     <td><input type="checkbox" name=""/></td>
-                    <td>1001</td>
-                    <td>사과 500g</td>                            
-                    <td>4,000원</td>
-                    <td>2</td>
-                    <td>3,000원</td>
-                    <td>11,000원</td>
-                    <td>김유신</td>
-                    <td>2023-01-01 13:06:14</td>
+                    <td><%= order.getOrderNo() %></td>
+                    <td><%= order.getOrderProduct() %></td>                            
+                    <td><%= order.getOrderPrice() %>원</td>
+                    <td><%= order.getOrderCount() %></td>
+                    <td><%= order.getOrderDelivery() %>원</td>
+                    <td><%= order.getOrderTotal() %>원</td>
+                    <td><%= order.getOrderUser() %></td>
+                    <td><%= order.getOrderDate() %></td>
                     <td><a href="#" class="showPopup">[상세확인]</a></td>
                 </tr>
+                <% } %>
             </table>
 
             <p>

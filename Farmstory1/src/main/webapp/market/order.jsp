@@ -89,13 +89,13 @@
             <h3>주문정보 입력</h3>
             <div class="shipping">
             	<form id="formOrder" action="/Farmstory1/market/proc/orderProc.jsp" method="post">
-	                <input type="text" name="orderProduct" value="<%= pNo %>"/>
-	                <input type="text" name="orderCount" value="<%= count %>"/>
-	                <input type="text" name="orderDelivery" value="<%= delivery %>"/>
-	                <input type="text" name="orderPrice" value="<%= price %>"/>
-	                <input type="text" name="orderTotal" value="<%= finalPrice %>"/>
-	                <input type="text" name="orderUser" value="<%= sessUser.getUid() %>"/>
-	                <input type="text" name="orderProduct" value="<%= pNo %>"/>
+	                <input type="hidden" name="orderProduct" value="<%= pNo %>"/>
+	                <input type="hidden" name="orderCount" value="<%= count %>"/>
+	                <input type="hidden" name="orderDelivery" value="<%= delivery %>"/>
+	                <input type="hidden" name="orderPrice" value="<%= price %>"/>
+	                <input type="hidden" name="orderTotal" value="<%= finalPrice %>"/>
+	                <input type="hidden" name="orderUser" value="<%= sessUser.getUid() %>"/>
+	                <input type="hidden" name="orderProduct" value="<%= pNo %>"/>
 	                
 	                <table>
 	                    <tr>
