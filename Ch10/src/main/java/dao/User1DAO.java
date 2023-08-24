@@ -24,7 +24,6 @@ public class User1DAO {
 			psmt.setString(3, dto.getHp());
 			psmt.setInt(4, dto.getAge());
 			psmt.executeUpdate();
-			
 			psmt.close();
 			conn.close();
 		}catch (Exception e) {
