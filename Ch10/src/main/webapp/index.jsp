@@ -3,7 +3,12 @@
 	<html>
 		<head>
 			<meta charset="UTF-8">
-			<title>Insert title here</title>
+			<title>index</title>
+			<!-- 
+				날짜 : 2023/08/24
+				이름 : 김철학
+				내용 : MVC 실습하기
+			-->
 		</head>
 	<body>
 		<h3>10장.MVC 실습</h3>
@@ -13,6 +18,9 @@
 		<a href="/Ch10/welcome.do">welcome</a>
 		<a href="/Ch10/greeting.do">greeting</a>
 		
+		<h4>User1 실습</h4>
+		<a href="/Ch10/user1/list.do">목록</a>
+		<a href="/Ch10/user1/register.do">등록</a>
 	
 	</body>
 </html>

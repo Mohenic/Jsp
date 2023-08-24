@@ -22,7 +22,7 @@ public class HelloController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		// View 포워딩
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/hello.jsp");
+		RequestDispatcher dispatcher = req.getRequestDispatcher("/hello.jsp");
 		dispatcher.forward(req, resp);
 	}
 	

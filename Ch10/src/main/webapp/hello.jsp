@@ -4,15 +4,9 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>hello</title>
-		<!-- 
-			날짜 : 2023/08/24
-			이름 : 김철학
-			내용 : MVC 실습하기
-		-->
 	</head>
 	<body>
 		<h1>hello</h1>
-		<a href="/Ch10">메인</a>
 		<a href="/Ch10/hello.do">hello</a>
 		<a href="/Ch10/welcome.do">welcome</a>
 		<a href="/Ch10/greeting.do">greeting</a>
