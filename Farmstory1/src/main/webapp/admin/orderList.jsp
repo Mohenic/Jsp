@@ -1,3 +1,4 @@
+<%@page import="com.google.gson.Gson"%>
 <%@page import="kr.farmstory1.db.Utils"%>
 <%@page import="kr.farmstory1.dto.OrderDTO"%>
 <%@page import="java.util.List"%>
@@ -49,6 +50,29 @@
 	
 	List<OrderDTO> orders = dao.selectOrders(start);
 %>
+<script>
+
+	$(function(){
+		
+		
+		$('input[name=all]').change(function(){
+			const isChecked = $(this).is(':checked');
+			
+			if(isChecked){
+				// 전체선택
+				$('input[name=chk]').prop('checked', true);
+			}else{
+				// 전체해제
+				$('input[name=chk]').prop('checked', false);
+			}
+		});
+	});
+	
+
+</script>
+
+
+
 <main>
     <%@ include file="./_aside.jsp" %>
     <section id="orderList">
@@ -57,7 +81,6 @@
         </nav>
 
         <article>
-
             <table border="0">
                 <tr>
                     <th><input type="checkbox" name="all"/></th>
@@ -73,17 +96,22 @@
                 </tr>
                 <% for(OrderDTO order : orders){ %>
                 <tr>
-                    <td><input type="checkbox" name=""/></td>
-                    <td><%= order.getOrderNo() %></td>
-                    <td><%= Utils.ellipsis(order.getpName(), 5) %></td>                            
-                    <td><%= Utils.comma(order.getOrderPrice()) %>원</td>
-                    <td><%= order.getOrderCount() %></td>
-                    <td><%= Utils.comma(order.getOrderDelivery()) %>원</td>
-                    <td><%= Utils.comma(order.getOrderTotal()) %>원</td>
-                    <td><%= order.getOrderUser() %></td>
-                    <td><%= order.getOrderDate() %></td>
+                    <td class="chk"><input type="checkbox" name="chk"/></td>
+                    <td class="orderNo"><%= order.getOrderNo() %></td>
+                    <td class="pName"><%= Utils.ellipsis(order.getpName(), 5) %></td>                            
+                    <td class="price"><%= Utils.comma(order.getOrderPrice()) %>원</td>
+                    <td class="count"><%= order.getOrderCount() %></td>
+                    <td class="delivery"><%= Utils.comma(order.getOrderDelivery()) %>원</td>
+                    <td class="total"><%= Utils.comma(order.getOrderTotal()) %>원</td>
+                    <td class="orderer"><%= order.getOrderUser() %></td>
+                    <td class="date"><%= order.getOrderDate() %></td>
                     <td><a href="#" class="showPopup">[상세확인]</a></td>
+                    <td class="hidden orderProduct"><%= order.getOrderProduct() %></td>
+                    <td class="hidden thumb1"><%= order.getThumb1() %></td>
+                    <td class="hidden receiver"><%= order.getReceiver() %></td>
+                    <td class="hidden address"><%= order.getAddr1()+" "+order.getAddr2() %></td>
                 </tr>
+                
                 <% } %>
             </table>
             <p>
@@ -116,33 +144,33 @@
             <h3>기본정보</h3>
             <table border="0">
                 <tr>
-                    <td rowspan="7" class="thumb"><img src="./images//sample_item1.jpg" alt="사과 500g"></td>
+                    <td rowspan="7" class="thumb"><img src="./images/sample_item1.jpg" alt="사과 500g"></td>
                     <td>상품번호</td>
-                    <td>1</td>
+                    <td class="orderProduct">상품번호</td>
                 </tr>
                 <tr>
                     <td>상품명</td>
-                    <td>사과 500g</td>
+                    <td class="pName">사과 500g</td>
                 </tr>
                 <tr>
                     <td>판매가격</td>
-                    <td>4,000원</td>
+                    <td class="price">4,000원</td>
                 </tr>
                 <tr>
                     <td>수량</td>
-                    <td>2개</td>
+                    <td class="count">2개</td>
                 </tr>
                 <tr>
                     <td>배송비</td>
-                    <td>3,000원</td>
+                    <td class="delivery">3,000원</td>
                 </tr>
                 <tr>
-                    <td>합계</td>
-                    <td>11,000원</td>
+                    <td>총합계</td>
+                    <td class="total">11,000원</td>
                 </tr>
                 <tr>
                     <td>주문자</td>
-                    <td>홍길동</td>
+                    <td class="orderer">홍길동</td>
                 </tr>                        
             </table>
 
@@ -150,11 +178,11 @@
             <table border="0">
                 <tr>
                     <td>받는분</td>
-                    <td>홍길동</td>
+                    <td class="receiver">홍길동</td>
                 </tr>
                 <tr>
                     <td>배송지</td>
-                    <td>부산광역시 부산진구 대연동 120 루미너스 10층</td>
+                    <td class="address">부산광역시 부산진구 대연동 120 루미너스 10층</td>
                 </tr>
             </table>
         </article>

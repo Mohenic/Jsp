@@ -135,5 +135,4 @@ public class OrderDTO {
 		this.orderDate = orderDate;
 	}
 	
-	
 }
