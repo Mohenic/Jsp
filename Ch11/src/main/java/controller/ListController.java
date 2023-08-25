@@ -9,20 +9,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @WebServlet("/list.do")
 public class ListController extends HttpServlet {
 
 	private static final long serialVersionUID = 2053973570967237161L;
+	
+	// 로거생성
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Override
 	public void init() throws ServletException {
-		System.out.println("ListController init()...1");
+		logger.debug("ListController init()...");
 	}
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("ListController doGet()...1");
-		
+		logger.info("ListController doGet() info log");
+		logger.warn("ListController doGet() warn log");
+		logger.error("ListController doGet() error log");
+		logger.info("ListController doGet() info log");
+		logger.warn("ListController doGet() warn log");
 		
 		// 포워드
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/list.jsp");
@@ -31,6 +40,7 @@ public class ListController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 	}
 	
 	

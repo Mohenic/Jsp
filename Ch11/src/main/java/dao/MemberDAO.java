@@ -24,7 +24,6 @@ public class MemberDAO {
 	// 로거생성
 	private Logger logger = LoggerFactory.getLogger(this.getClass()); 
 	
-	
 	public void insertMember(MemberDTO dto) {
 		try {
 			logger.info("MemberDAO insertMember...");
