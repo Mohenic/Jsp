@@ -24,6 +24,8 @@ public class UserService {
 		return instance;
 	}
 	private UserService() {}
+	
+	private static String generatedCode;
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private UserDAO dao = UserDAO.getInstance();
@@ -64,6 +66,7 @@ public class UserService {
 		
 		// 인증코드 생성
 		int code = ThreadLocalRandom.current().nextInt(100000, 1000000);
+		generatedCode = ""+code;
 		
 		// 기본정보
 		String sender = "chhak0503@gmail.com";
@@ -99,15 +102,27 @@ public class UserService {
 			message.setSubject(title);
 			message.setContent(content, "text/html;charset=UTF-8");
 			Transport.send(message);
-			
 			status = 1;
 			
 		}catch(Exception e){
-			status = 0;			
+			status = 0;
+			logger.error("sendCodeByEmail() error : " + e.getMessage());
 		}
 		
 		return status;
+	} // sendCodeByEmail end
+	
+	public int cofirmCodeByEmail(String code) {
+		
+		if(code.equals(generatedCode)) {
+			logger.info("return 1...");
+			return 1;
+		}else {
+			logger.info("return 0...");
+			return 0;
+		}
 	}
+	
 	
 	
 }
