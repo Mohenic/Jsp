@@ -18,6 +18,18 @@ public class UserService {
 		dao.insertUser(dto);
 	}
 	
+	public int selectCountUid(String uid) {
+		return dao.selectCountUid(uid);
+	}
+	
+	public int selectCountNick(String nick) {
+		return dao.selectCountNick(nick);
+	}
+	
+	public int selectCountHp(String hp) {
+		return dao.selectCountHp(hp);
+	}
+	
 	public UserDTO selectUser(String uid) {
 		return dao.selectUser(uid);
 	}
