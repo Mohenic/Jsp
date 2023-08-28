@@ -60,7 +60,9 @@
 			const hp = $(this).val();
 			const url = '/Jboard2/user/checkHp.do?hp='+hp;
 			
-			$.get(url, function(data){
+			$.get(url, function(result){
+				
+				const data = JSON.parse(result);
 				
 				if(data.result > 0){
 					$('.resultHp').css('color', 'red').text('이미 사용중인 휴대폰입니다.');
@@ -71,7 +73,84 @@
 			});
 		});
 		
+		
 	}// onload end
+	
+	// 이메일 인증
+	$(function(){
+		
+		let preventDoubleClick = false;
+		
+		$('#btnEmailCode').click(function(){
+			
+			const email = $('input[name=email]').val();
+			const jsonData = {
+				"email": email
+			};
+			
+			if(preventDoubleClick){
+				return;
+			}
+			
+			preventDoubleClick = true;
+			$('.resultEmail').text('인증코드 전송 중 입니다. 잠시만 기다리세요...');
+			
+			setTimeout(function(){
+				
+				$.ajax({
+					url:'/Jboard2/user/authEmail.do',
+					type: 'GET',
+					data: jsonData,
+					dataType: 'json',
+					success: function(data){
+						
+						console.log(data);
+						
+						if(data.status > 0){
+							$('.resultEmail').css('color', 'green').text('이메일을 확인 후 인증코드를 입력하세요.');
+							$('.auth').show();
+						}else{
+							$('.resultEmail').css('color', 'red').text('인증코드 전송이 실패했습니다. 이메일을 정확히 입력하십시요.');
+						}
+						
+						preventDoubleClick = false;
+						
+					}				
+				});
+				
+			}, 1000);
+			
+			
+		});
+		
+		$('#btnEmailAuth').click(function(){
+			
+			const code = $('input[name=auth]').val();
+			
+			if(receivedCode == code){
+				$('.resultEmail').css('color', 'green').text('이메일이 인증 되었습니다.');	
+			}else{
+				$('.resultEmail').css('color', 'red').text('인증에 실패 했습니다.');
+			}
+			
+		});
+		
+		
+	});
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 </script>
 
@@ -119,10 +198,11 @@
                     <td>이메일</td>
                     <td>
                         <input type="email" name="email" placeholder="이메일 입력"/>
-                        <button type="button"><img src="../img/chk_auth.gif" alt="인증번호 받기"/></button>
+                        <button type="button" id="btnEmailCode"><img src="../img/chk_auth.gif" alt="인증번호 받기"/></button>
+                        <span class="resultEmail"></span>
                         <div class="auth">
                             <input type="text" name="auth" placeholder="인증번호 입력"/>
-                            <button type="button"><img src="../img/chk_confirm.gif" alt="확인"/></button>
+                            <button type="button" id="btnEmailAuth"><img src="../img/chk_confirm.gif" alt="확인"/></button>
                         </div>
                     </td>
                 </tr>
