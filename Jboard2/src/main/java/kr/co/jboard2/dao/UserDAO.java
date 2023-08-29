@@ -129,6 +129,28 @@ public class UserDAO extends DBHelper {
 		return result;
 	}
 	
+	public int selectCountNameAndEmail(String name, String email) {
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_COUNT_NAME_EMAIL);
+			psmt.setString(1, name);
+			psmt.setString(2, email);
+			
+			rs = psmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt(1);
+			}
+			close();
+			
+		}catch (Exception e) {
+			logger.error("selectCountNameAndEmail() error : " + e.getMessage());
+		}
+		
+		return result;
+	}
+	
 	public UserDTO selectUser(String uid, String pass) {
 		
 		UserDTO dto = null;
