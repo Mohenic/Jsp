@@ -29,10 +29,12 @@ public class AuthEmailController extends HttpServlet {
 
 		String email = req.getParameter("email");
 		
+		int result = service.selectCountEmail(email);
 		int status = service.sendCodeByEmail(email);
 		
 		// JSON 생성
 		JsonObject json = new JsonObject();
+		json.addProperty("result", result);
 		json.addProperty("status", status);
 		
 		// JSON 출력

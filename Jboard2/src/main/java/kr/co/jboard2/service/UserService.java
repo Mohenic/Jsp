@@ -30,7 +30,6 @@ public class UserService {
 	private UserDAO dao = UserDAO.getInstance();
 	private String generatedCode;
 	
-	
 	public void insertUser(UserDTO dto) {
 		dao.insertUser(dto);
 	}
@@ -47,8 +46,12 @@ public class UserService {
 		return dao.selectCountHp(hp);
 	}
 	
-	public UserDTO selectUser(String uid) {
-		return dao.selectUser(uid);
+	public int selectCountEmail(String email) {
+		return dao.selectCountEmail(email);
+	}
+	
+	public UserDTO selectUser(String uid, String pass) {
+		return dao.selectUser(uid, pass);
 	}
 	
 	public List<UserDTO> selectUsers() {
