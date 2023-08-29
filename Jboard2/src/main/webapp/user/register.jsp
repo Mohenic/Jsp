@@ -1,167 +1,103 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="./_header.jsp" %>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="/Jboard2/js/zipcode.js"></script>
+<script src="/Jboard2/js/authEmail.js"></script>
 <script>
+	// 폼 데이터 검증 상태변수
+	let isUidOk   = false;
+	let isPassOk  = false;
+	let isNameOk  = false;
+	let isNickOk  = false;
+	let isEmailOk = false;
+	let isHpOk    = false;
 	
-	window.onload = function(){
+	// 데이터 검증에 사용하는 정규표현식
+	const reUid   = /^[a-z]+[a-z0-9]{4,19}$/g;
+	const rePass  = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{5,16}$/;
+	const reName  = /^[가-힣]{2,10}$/ 
+	const reNick  = /^[a-zA-Zㄱ-힣0-9][a-zA-Zㄱ-힣0-9]*$/;
+	const reEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+	const reHp    = /^01(?:0|1|[6-9])-(?:\d{4})-\d{4}$/;
+
+	// 유효성 검사(Validation)
+	$(function(){
+		// 아이디 검사
+		$('input[name=uid]').keydown(function(){
+			$('.uidResult').text('');
+			isUidOk = false;
+		});
 		
-		const inputUid = document.getElementsByName('uid')[0];
-		const uidResult = document.getElementsByClassName('uidResult')[0];
-		const btnCheckUid = document.getElementById('btnCheckUid');
-		
-		btnCheckUid.onclick = function(){
+		// 비밀번호 검사
+		$('input[name=pass2]').focusout(function(){
 			
-			const xhr = new XMLHttpRequest();
-			xhr.open('GET', '/Jboard2/user/checkUid.do?uid='+inputUid.value);
-			xhr.send();
+			const pass1 = $('input[name=pass1]').val();
+			const pass2 = $('input[name=pass2]').val();
 			
-			xhr.onreadystatechange = function(){
+			if(pass1 == pass2){
 				
-				if(xhr.readyState == XMLHttpRequest.DONE){
-					
-					if(xhr.status == 200){
-						
-						const data = JSON.parse(xhr.response);
-						
-						if(data.result > 0){
-							uidResult.innerText = '이미 사용중인 아이디 입니다.';
-							uidResult.style.color = 'red';							
-						}else{
-							uidResult.innerText = '사용 가능한 아이디 입니다.';
-							uidResult.style.color = 'green';
-						}
-					}
-				}// readyState end
-			}// onreadystatechange end
-		}// btnCheckUid onclick end
-		
-		$('#btnCheckNick').click(function(){
-			
-			const nick = $('input[name=nick]').val();
-			
-			$.ajax({
-				url:'/Jboard2/user/checkNick.do?nick='+nick,
-				type:'get',
-				dataType:'json',
-				success: function(data){
-					
-					if(data.result > 0){
-						$('.nickResult').css('color', 'red').text('이미 사용중인 별명입니다.');
-					}else{
-						$('.nickResult').css('color', 'green').text('사용 가능한 별명입니다.');
-					}
-					
-				}
-			});
-			
-		});// btnCheckNick end
-		
-		$('input[name=hp]').focusout(function(){
-			
-			const hp = $(this).val();
-			const url = '/Jboard2/user/checkHp.do?hp='+hp;
-			
-			$.get(url, function(result){
-				
-				const data = JSON.parse(result);
-				
-				if(data.result > 0){
-					$('.resultHp').css('color', 'red').text('이미 사용중인 휴대폰입니다.');
+				if(pass2.match(rePass)){
+					$('.passResult').css('color', 'green').text('사용할 수 있는 비밀번호 입니다.');
+					isPassOk = true;
 				}else{
-					$('.resultHp').css('color', 'green').text('사용 가능한 휴대폰입니다.');
+					$('.passResult').css('color', 'red').text('사용할 수 없는 비밀번호 입니다.');
+					isPassOk = false;
 				}
-				
-			});
+			}else{
+				$('.passResult').css('color', 'red').text('비밀번호가 일치하지 않습니다.');
+				isPassOk = false;
+			}
 		});
 		
 		
-	}// onload end
-	
-	// 이메일 인증
-	$(function(){
+		// 이름 검사
+		// 별명 검사
+		// 이메일 검사
+		// 휴대폰 검사
 		
-		let preventDoubleClick = false;
-		
-		$('#btnEmailCode').click(function(){
+		// 최종확인
+		$('#formUser').submit(function(){
 			
-			const email = $('input[name=email]').val();
-			const jsonData = {
-				"email": email
-			};
-			
-			if(preventDoubleClick){
-				return;
+			if(!isUidOk){
+				alert('아이디를 확인하십시요.');
+				return false; // 폼 전송 취소
 			}
 			
-			preventDoubleClick = true;
-			$('.resultEmail').text('인증코드 전송 중 입니다. 잠시만 기다리세요...');
+			if(!isPassOk){
+				alert('비밀번호를 확인하십시요.');
+				return false; // 폼 전송 취소
+			}
 			
-			setTimeout(function(){
-				
-				$.ajax({
-					url:'/Jboard2/user/authEmail.do',
-					type: 'GET',
-					data: jsonData,
-					dataType: 'json',
-					success: function(data){
-						console.log(data);
-						
-						if(data.status > 0){
-							$('.resultEmail').css('color', 'green').text('이메일을 확인 후 인증코드를 입력하세요.');
-							$('.auth').show();
-						}else{
-							$('.resultEmail').css('color', 'red').text('인증코드 전송이 실패했습니다. 잠시후 다시 시도하십시요.');
-						}
-						preventDoubleClick = false;
-					}				
-				});
-			}, 1000);
-		});
-		
-		$('#btnEmailAuth').click(function(){
-			const code = $('input[name=auth]').val();
-			const jsonData = {
-				"code": code
-			};
-					
-			$.ajax({
-				url: '/Jboard2/user/authEmail.do',
-				type: 'POST',
-				data: jsonData,
-				dataType: 'json',
-				success: function(data){
-					
-					console.log(data);
-					
-					if(data.result > 0){
-						$('.resultEmail').css('color', 'green').text('이메일 인증이 완료 되었습니다.');
-					}else{
-						$('.resultEmail').css('color', 'red').text('이메일 인증이 실패 했습니다.다시 시도하십시요.');
-					}
-					
-				}
-			});
+			if(!isNameOk){
+				alert('이름을 확인하십시요.');
+				return false; // 폼 전송 취소
+			}
+			
+			if(!isNickOk){
+				alert('별명을 확인하십시요.');
+				return false; // 폼 전송 취소
+			}
+			
+			if(!isEmailOk){
+				alert('이메일을 확인하십시요.');
+				return false; // 폼 전송 취소
+			}
+			
+			if(!isHpOk){
+				alert('휴대폰을 확인하십시요.');
+				return false; // 폼 전송 취소
+			}
+			
+			return true; // 폼 전송 시작
 		});
 	});
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 </script>
+<script src="/Jboard2/js/checkUser.js"></script>
 
 <main id="user">
     <section class="register">
-        <form action="/Jboard2/user/register.do" method="post">
+        <form id="formUser" action="/Jboard2/user/register.do" method="post">
             <table border="1">
                 <caption>사이트 이용정보 입력</caption>
                 <tr>
@@ -178,7 +114,10 @@
                 </tr>
                 <tr>
                     <td>비밀번호 확인</td>
-                    <td><input type="password" name="pass2" placeholder="비밀번호 입력 확인"/></td>
+                    <td>
+                    	<input type="password" name="pass2" placeholder="비밀번호 입력 확인"/>
+                    	<span class="passResult"></span>
+                    </td>
                 </tr>
             </table>
 
@@ -222,7 +161,7 @@
                     <td>주소</td>
                     <td>
                         <input type="text" name="zip" placeholder="우편번호"/>
-                        <button type="button"><img src="../img/chk_post.gif" alt="우편번호찾기"/></button>
+                        <button type="button" onclick="zipcode()"><img src="../img/chk_post.gif" alt="우편번호찾기"/></button>
                         <input type="text" name="addr1" placeholder="주소 검색"/>
                         <input type="text" name="addr2" placeholder="상세주소 입력"/>
                     </td>

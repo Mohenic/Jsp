@@ -19,16 +19,17 @@ import kr.co.jboard2.dao.UserDAO;
 import kr.co.jboard2.dto.UserDTO;
 
 public class UserService {
+	
 	private static UserService instance = new UserService();
 	public static UserService getInstance() {
 		return instance;
 	}
 	private UserService() {}
 	
-	private static String generatedCode;
-
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	private UserDAO dao = UserDAO.getInstance();
+	private String generatedCode;
+	
 	
 	public void insertUser(UserDTO dto) {
 		dao.insertUser(dto);
@@ -65,8 +66,8 @@ public class UserService {
 	public int sendCodeByEmail(String receiver) {
 		
 		// 인증코드 생성
-		int code = ThreadLocalRandom.current().nextInt(100000, 1000000);
-		generatedCode = ""+code;
+		int code = ThreadLocalRandom.current().nextInt(100000, 1000000);		
+		generatedCode = String.valueOf(code);
 		
 		// 기본정보
 		String sender = "chhak0503@gmail.com";
