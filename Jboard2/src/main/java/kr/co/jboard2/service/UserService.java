@@ -58,6 +58,10 @@ public class UserService {
 		return dao.selectUser(uid, pass);
 	}
 	
+	public UserDTO selectUserByNameAndEmail(String name, String email) {
+		return dao.selectUserByNameAndEmail(name, email);				
+	}
+	
 	public List<UserDTO> selectUsers() {
 		return dao.selectUsers();
 	}
