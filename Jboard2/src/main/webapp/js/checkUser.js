@@ -81,6 +81,13 @@ window.onload = function(){
 	$('input[name=hp]').focusout(function(){
 		
 		const hp = $(this).val();
+		
+		if(!hp.match(reHp)){
+			$('.resultHp').text('휴대폰 번호가 유효하지 않습니다.');
+			isHpOk = false;
+			return;	
+		}
+		
 		const url = '/Jboard2/user/checkHp.do?hp='+hp;
 		
 		$.get(url, function(result){
