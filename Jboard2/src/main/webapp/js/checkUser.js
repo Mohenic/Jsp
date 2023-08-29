@@ -51,6 +51,13 @@ window.onload = function(){
 		
 		const nick = $('input[name=nick]').val();
 		
+		// 별명 유효성 검사
+		if(!nick.match(reNick)){
+			$('.nickResult').css('color', 'red').text('유효한 별명이 아닙니다.');
+			isNickOk = false;
+			return;				
+		}
+		
 		$.ajax({
 			url:'/Jboard2/user/checkNick.do?nick='+nick,
 			type:'get',
@@ -59,8 +66,10 @@ window.onload = function(){
 				
 				if(data.result > 0){
 					$('.nickResult').css('color', 'red').text('이미 사용중인 별명입니다.');
+					isNickOk = false;
 				}else{
 					$('.nickResult').css('color', 'green').text('사용 가능한 별명입니다.');
+					isNickOk = true;
 				}
 				
 			}
@@ -80,8 +89,10 @@ window.onload = function(){
 			
 			if(data.result > 0){
 				$('.resultHp').css('color', 'red').text('이미 사용중인 휴대폰입니다.');
+				isHpOk = false;
 			}else{
 				$('.resultHp').css('color', 'green').text('사용 가능한 휴대폰입니다.');
+				isHpOk = true;
 			}
 			
 		});
