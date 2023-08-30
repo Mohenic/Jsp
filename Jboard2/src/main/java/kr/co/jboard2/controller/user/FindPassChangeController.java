@@ -15,7 +15,9 @@ public class FindPassChangeController extends HttpServlet {
 	private static final long serialVersionUID = -5829551568076311851L;
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String uid = req.getParameter("uid");
+		req.setAttribute("uid", uid);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/user/findPassChange.jsp");
 		dispatcher.forward(req, resp);

@@ -54,6 +54,10 @@ public class UserService {
 		return dao.selectCountNameAndEmail(name, email);				
 	}
 	
+	public int selectCountUidAndEmail(String uid, String email) {
+		return dao.selectCountUidAndEmail(uid, email);
+	}
+	
 	public UserDTO selectUser(String uid, String pass) {
 		return dao.selectUser(uid, pass);
 	}
