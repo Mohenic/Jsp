@@ -19,7 +19,7 @@ public class FindIdResultController extends HttpServlet {
 	private UserService service = UserService.getInstance();
 	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		String name  = req.getParameter("name");
 		String email = req.getParameter("email");
