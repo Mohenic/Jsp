@@ -7,6 +7,8 @@
 		alert('아이디, 비밀번호를 다시 확인하십시요.');
 	}else if(success == 200){
 		alert('정상적으로 로그아웃 되었습니다.');
+	}else if(success == 300){
+		alert('비밀번호가 변경 되었습니다. 다시 로그인 하시기 바랍니다.');
 	}
 </script>
 <main id="user">

@@ -38,7 +38,10 @@ public class AuthEmailController extends HttpServlet {
 		if(type.equals("REGISTER")) {
 			// 회원가입할 때 이메일 인증
 			result = service.selectCountEmail(email);
-			status = service.sendCodeByEmail(email);
+			
+			if(result == 0) {
+				status = service.sendCodeByEmail(email);	
+			}
 		}else if(type.equals("FIND_ID")){
 			// 아이디 찾기 할 때 이메일 인증
 			result = service.selectCountNameAndEmail(name, email);

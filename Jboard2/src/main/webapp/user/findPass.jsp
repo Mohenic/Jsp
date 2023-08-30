@@ -17,7 +17,7 @@
 </script>
 <main id="user">
     <section class="find findPass">
-        <form id="formFindPass" action="/Jboard2/user/findPassChange.do" method="post">
+        <form id="formFindPass" action="/Jboard2/user/findPass.do" method="post">
         	<input type="hidden" name="type" value="FIND_PASS"/>
             <table border="0">
                 <caption>비밀번호 찾기</caption>                        
