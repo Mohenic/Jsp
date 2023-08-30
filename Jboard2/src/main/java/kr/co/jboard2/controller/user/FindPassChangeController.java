@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,8 +25,15 @@ public class FindPassChangeController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		RequestDispatcher dispatcher = req.getRequestDispatcher("/user/findPassChange.jsp");
-		dispatcher.forward(req, resp);
+		HttpSession session = req.getSession();
+		String uid = (String) session.getAttribute("uid");
+		
+		if(uid == null) {
+			resp.sendRedirect("/Jboard2/user/findPass.do");
+		}else {
+			RequestDispatcher dispatcher = req.getRequestDispatcher("/user/findPassChange.jsp");
+			dispatcher.forward(req, resp);	
+		}
 	}
 	
 	@Override

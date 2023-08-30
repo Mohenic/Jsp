@@ -268,7 +268,39 @@ public class UserDAO extends DBHelper {
 		}
 	}
 	
+	public int updateUserForWithdraw(String uid) {
+		int result = 0;
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.UPDATE_USER_FOR_WITHDRAW);
+			psmt.setString(1, uid);
+			result = psmt.executeUpdate();
+			close();
+		}catch(Exception e) {
+			logger.error("updateUserForWithdraw() error : " + e.getMessage());
+		}
+		return result;
+	}
+	
 	public void deleteUser(String uid) {
+		try {
+			conn = getConnection();
+			
+		}catch(Exception e) {
+			logger.error("deleteUser() error : " + e.getMessage());
+		}
 		
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
