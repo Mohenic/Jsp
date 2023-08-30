@@ -56,6 +56,9 @@ public class AuthEmailController extends HttpServlet {
 			if(result == 1) {
 				status = service.sendCodeByEmail(email);
 			}
+		}else if(type.equals("MODIFY")){
+			// 이메일을 수정할 때 이메일 인증
+			status = service.sendCodeByEmail(email);
 		}
 		
 		// JSON 생성

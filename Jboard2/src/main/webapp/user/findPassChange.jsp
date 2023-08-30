@@ -12,7 +12,7 @@
 			if(isPassOk){
 				formFindPassChange.submit();
 			}else{
-				alert('변경 비밀번호가 유효하지 않거나 일치하지 않습니다.')
+				alert('변경 비밀번호가 유효하지 않거나 일치하지 않습니다.');
 			}
 		}
 	}

@@ -74,8 +74,8 @@ public class UserService {
 		dao.updateUser(dto);
 	}
 	
-	public void updateUserPass(String uid, String pass) {
-		dao.updateUserPass(uid, pass);
+	public int updateUserPass(String uid, String pass) {
+		return dao.updateUserPass(uid, pass);
 	}
 	
 	public int updateUserForWithdraw(String uid) {

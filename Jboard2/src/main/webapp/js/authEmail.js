@@ -13,12 +13,19 @@ $(function(){
 		const name  = $('input[name=name]').val();
 		const email = $('input[name=email]').val();
 		
+		console.log('type : ' + type);
+		console.log('uid : ' + uid);
+		console.log('name : ' + name);
+		console.log('email : ' + email);
+		
 		const jsonData = {
 			"type": type,
 			"uid": uid,
 			"name": name,
 			"email": email
 		};
+		
+		console.log('jsonData : ' + jsonData);
 		
 		if(preventDoubleClick){
 			return;
