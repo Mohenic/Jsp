@@ -25,7 +25,6 @@ public class SQL {
 	public static final String SELECT_COUNT_HP    = "SELECT COUNT(*) FROM `User` WHERE `hp`=?";
 	public static final String SELECT_TERMS       = "SELECT * FROM `Terms`";
 	
-	
 	public static final String UPDATE_USER = "UPDATE `User` SET "
 												+ "`name`=?,"
 												+ "`nick`=?,"
