@@ -2,6 +2,7 @@ package kr.co.jboard2.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,6 +16,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kr.co.jboard2.dao.ArticleDAO;
+import kr.co.jboard2.db.SQL;
 import kr.co.jboard2.dto.ArticleDTO;
 
 public enum ArticleService {
@@ -28,7 +30,7 @@ public enum ArticleService {
 		return dao.insertArticle(dto);
 	}
 	
-	public ArticleDTO selectArticle(int no) {
+	public ArticleDTO selectArticle(String no) {
 		return dao.selectArticle(no);
 	}
 	
@@ -40,12 +42,37 @@ public enum ArticleService {
 		dao.updateArticle(dto);
 	}
 	
-	public void deleteArticle(int no) {
+	public void deleteArticle(String no) {
 		dao.deleteArticle(no);
 	}
-	
+
+	// 추가 
 	public int selectCountTotal() {
 		return dao.selectCountTotal();
+	}
+	
+	public List<ArticleDTO> selectComments(String parent) {
+		return dao.selectComments(parent);
+	}
+	
+	public void insertComment(ArticleDTO dto) {
+		dao.insertComment(dto);
+	}
+	
+	public void updateArticleForCommentPlus(String no) {
+		dao.updateArticleForCommentPlus(no);
+	}
+	
+	public void updateArticleForCommentMinus(String no) {
+		dao.updateArticleForCommentMinus(no);
+	}
+
+	public void updateComment(String no, String content) {
+		dao.updateComment(no, content);
+	}
+	
+	public void deleteComment(String no) {
+		dao.deleteComment(no);
 	}
 	
 	// 업로드 경로 구하기

@@ -20,10 +20,9 @@ import kr.co.jboard2.service.ArticleService;
 
 @WebServlet("/list.do")
 public class ListController extends HttpServlet {
-
 	private static final long serialVersionUID = 7787169292569437228L;
-	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 	private ArticleService service = ArticleService.INSTANCE;	
 	
 	@Override
@@ -33,6 +32,7 @@ public class ListController extends HttpServlet {
 		HttpSession session = req.getSession();
 		UserDTO sessUser = (UserDTO) session.getAttribute("sessUser");
 		
+		// 현재 페이지 번호 수신
 		String pg = req.getParameter("pg");
 		
 		// 현재 페이지 번호
@@ -58,6 +58,7 @@ public class ListController extends HttpServlet {
 		
 		if(sessUser != null) {
 			
+			// VIEW 공유 참조
 			req.setAttribute("articles", articles);
 			req.setAttribute("currentPage", currentPage);
 			req.setAttribute("lastPageNum", lastPageNum);
