@@ -58,6 +58,7 @@ public class WriteController extends HttpServlet {
 		ArticleDTO dto = new ArticleDTO();
 		dto.setTitle(title);
 		dto.setContent(content);
+		dto.setFile(oName);
 		dto.setWriter(writer);
 		dto.setRegip(regip);
 
