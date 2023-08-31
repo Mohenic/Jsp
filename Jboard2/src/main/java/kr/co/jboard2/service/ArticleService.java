@@ -32,4 +32,21 @@ public enum ArticleService {
 		dao.deleteArticle(no);
 	}
 	
+	
+	// 업로드 경로 구하기
+	public void getUploadPath() {
+		
+	}
+	
+	// 파일 업로드
+	public void uploadFile() {
+		
+	}
+	
+	// 파일 다운로드
+	public void downloadFile() {
+		
+	}
+	
+	
 }
