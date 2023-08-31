@@ -1,5 +1,6 @@
 package kr.co.jboard2.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import kr.co.jboard2.db.DBHelper;
@@ -14,6 +15,8 @@ public class ArticleDAO extends DBHelper {
 		
 		try {
 			conn = getConnection();
+			conn.setAutoCommit(false); // Transaction 시작
+			
 			stmt = conn.createStatement();
 			psmt = conn.prepareStatement(SQL.INSERT_ARTICLE);
 			psmt.setString(1, dto.getTitle());
@@ -22,11 +25,11 @@ public class ArticleDAO extends DBHelper {
 			psmt.setString(4, dto.getRegip());
 			psmt.executeUpdate();
 			rs = stmt.executeQuery(SQL.SELECT_MAX_NO);
+			conn.commit(); // 작업확정
 			
 			if(rs.next()) {
 				no = rs.getInt(1);
 			}
-			
 			close();
 		}catch(Exception e){
 			e.printStackTrace();
