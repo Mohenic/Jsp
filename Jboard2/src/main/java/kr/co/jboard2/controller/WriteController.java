@@ -16,13 +16,16 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kr.co.jboard2.dto.ArticleDTO;
+import kr.co.jboard2.dto.FileDTO;
 import kr.co.jboard2.service.ArticleService;
+import kr.co.jboard2.service.FileService;
 
 @WebServlet("/write.do")
 public class WriteController extends HttpServlet {
 	private static final long serialVersionUID = 992090960044622875L;
 	
-	private ArticleService service = ArticleService.INSTANCE;
+	private ArticleService aService = ArticleService.INSTANCE;
+	private FileService fService = FileService.INSTANCE;
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -51,7 +54,17 @@ public class WriteController extends HttpServlet {
 		String oName   = mr.getOriginalFileName("file");		
 		String regip   = req.getRemoteAddr();
 		
-		// 파일명 수정 및 파일 테이블 Insert
+		// DTO 생성
+		ArticleDTO dto = new ArticleDTO();
+		dto.setTitle(title);
+		dto.setContent(content);
+		dto.setWriter(writer);
+		dto.setRegip(regip);
+
+		// 글 Insert
+		int no = aService.insertArticle(dto);
+		
+		// 파일명 수정 및 파일 Insert
 		if(oName != null) {
 			
 			int i = oName.lastIndexOf(".");
@@ -67,18 +80,13 @@ public class WriteController extends HttpServlet {
 			f1.renameTo(f2);
 			
 			// 파일 테이블 Insert
+			FileDTO fileDto = new FileDTO();
+			fileDto.setAno(no);
+			fileDto.setOfile(oName);
+			fileDto.setSfile(sName);
 			
+			fService.insertFile(fileDto);
 		}
-		
-		// DTO 생성
-		ArticleDTO dto = new ArticleDTO();
-		dto.setTitle(title);
-		dto.setContent(content);
-		dto.setWriter(writer);
-		dto.setRegip(regip);
-
-		// DB Insert
-		service.insertArticle(dto);
 		
 		// 리다이렉트
 		resp.sendRedirect("/Jboard2/list.do");

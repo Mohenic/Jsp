@@ -5,7 +5,8 @@ import java.util.List;
 import kr.co.jboard2.dao.FileDAO;
 import kr.co.jboard2.dto.FileDTO;
 
-public class FileService {
+public enum FileService {
+	INSTANCE;
 	
 	private FileDAO dao = new FileDAO();
 
