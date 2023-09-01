@@ -77,8 +77,8 @@ public enum ArticleService {
 		dao.updateComment(no, content);
 	}
 	
-	public void deleteComment(String no) {
-		dao.deleteComment(no);
+	public int deleteComment(String no) {
+		return dao.deleteComment(no);
 	}
 	
 	// 업로드 경로 구하기
