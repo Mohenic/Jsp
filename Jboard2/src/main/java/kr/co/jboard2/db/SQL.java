@@ -110,18 +110,6 @@ public class SQL {
 											+ "`sfile`=?,"
 											+ "`rdate`=NOW()";
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-			
-	
+	public final static String SELECT_FILE = "SELECT * FROM `File` WHERE `fno`=?";
 	
 }

@@ -14,7 +14,7 @@
 	            <tr>
 	                <th>파일</th>
 	                <td>
-	                	<a href="#">${article.fileDto.ofile}</a>&nbsp;
+	                	<a href="/Jboard2/fileDownload.do?fno=${article.fileDto.fno}">${article.fileDto.ofile}</a>&nbsp;
 	                	<span>${article.fileDto.download}</span>회 다운로드
 	                </td>
 	            </tr>
