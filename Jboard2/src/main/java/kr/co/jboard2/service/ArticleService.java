@@ -40,8 +40,8 @@ public enum ArticleService {
 		return dao.selectArticle(no);
 	}
 	
-	public List<ArticleDTO> selectArticles(int start) {
-		return dao.selectArticles(start);
+	public List<ArticleDTO> selectArticles(int start, String search) {
+		return dao.selectArticles(start, search);
 	}
 	
 	public void updateArticle(ArticleDTO dto) {
@@ -53,8 +53,8 @@ public enum ArticleService {
 	}
 
 	// 추가 
-	public int selectCountTotal() {
-		return dao.selectCountTotal();
+	public int selectCountTotal(String search) {
+		return dao.selectCountTotal(search);
 	}
 	
 	public List<ArticleDTO> selectComments(String parent) {

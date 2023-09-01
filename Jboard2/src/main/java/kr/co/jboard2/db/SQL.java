@@ -84,6 +84,16 @@ public class SQL {
 												+ "ORDER BY `no` DESC "
 												+ "LIMIT ?, 10";
 	
+	public final static String SELECT_ARTICLES_FOR_SEARCH = "SELECT "
+												+ "a.*, "
+												+ "b.`nick` "
+												+ "FROM `Article` AS a "
+												+ "JOIN `User` AS b ON a.writer = b.uid "
+												+ "WHERE `parent`=0 AND `title` LIKE ? "
+												+ "ORDER BY `no` DESC "
+												+ "LIMIT ?, 10";
+	
+	
 	public final static String SELECT_COMMENTS = "SELECT "
 												+ "a.*, "
 												+ "b.`nick` "
@@ -92,6 +102,7 @@ public class SQL {
 												+ "WHERE `parent`=?";
 	
 	public final static String SELECT_COUNT_TOTAL = "SELECT COUNT(*) FROM `Article` WHERE `parent`=0";
+	public final static String SELECT_COUNT_TOTAL_FOR_SEARCH = "SELECT COUNT(*) FROM `Article` WHERE `parent`=0 AND `title` LIKE ?";
 	
 	
 	
