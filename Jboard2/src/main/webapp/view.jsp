@@ -1,6 +1,44 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="./_header.jsp" %>
+<script>
+	
+	$(function(){
+		
+		$('#btnComment').click(function(e){
+			e.preventDefault();
+			
+			const parent = $('#formComment > input[name=parent]').val();
+			const content = $('#formComment > textarea[name=content]').val();
+			const writer = $('#formComment > input[name=writer]').val();
+			
+			
+			const jsonData = {
+				"parent": parent,
+				"content": content,
+				"writer": writer
+			};
+			
+			console.log('jsonData : ' + jsonData);
+			
+			$.ajax({
+				url: '/Jboard2/comment.do',
+				type: 'post',
+				data: jsonData,
+				dataType: 'json',
+				success: function(data){
+					console.log(data);
+					
+					if(data.result > 0){
+						alert('댓글이 등록 되었습니다.');
+					}else{
+						alert('댓글 등록이 실패했습니다.');
+					}
+				}				
+			});
+		});
+	});
+</script>
 <main id="board">
     <section class="view">
         
@@ -55,13 +93,13 @@
         <!-- 댓글쓰기 -->
         <section class="commentForm">
             <h3>댓글쓰기</h3>
-            <form action="/Jboard2/comment.do" method="post">
+            <form id="formComment" action="#" method="post">
             	<input type="hidden" name="parent" value="${no}"/>
             	<input type="hidden" name="writer" value="${sessUser.uid}"/>
                 <textarea name="content"></textarea>
                 <div>
                     <a href="#" class="btn btnCancel">취소</a>
-                    <input type="submit" value="작성완료" class="btn btnComplete"/>
+                    <input type="submit" id="btnComment" value="작성완료" class="btn btnComplete"/>
                 </div>
             </form>
         </section>

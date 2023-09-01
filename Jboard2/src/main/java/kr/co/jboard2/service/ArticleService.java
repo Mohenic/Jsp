@@ -61,8 +61,8 @@ public enum ArticleService {
 		return dao.selectComments(parent);
 	}
 	
-	public void insertComment(ArticleDTO dto) {
-		dao.insertComment(dto);
+	public int insertComment(ArticleDTO dto) {
+		return dao.insertComment(dto);
 	}
 	
 	public void updateArticleForCommentPlus(String no) {

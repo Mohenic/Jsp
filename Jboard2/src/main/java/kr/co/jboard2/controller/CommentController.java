@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.gson.JsonObject;
+
 import kr.co.jboard2.dto.ArticleDTO;
 import kr.co.jboard2.service.ArticleService;
 
@@ -40,12 +42,14 @@ public class CommentController extends HttpServlet{
 		dto.setRegip(regip);
 		
 		// 댓글 입력
-		service.insertComment(dto);
+		int result = service.insertComment(dto);
 		
-		// 댓글 카운트 수정 Plus
-		service.updateArticleForCommentPlus(parent);
+		// 리다이렉트(폼 전송)
+		//resp.sendRedirect("/Jboard2/view.do?no="+parent);
 		
-		// 리다이렉트
-		resp.sendRedirect("/Jboard2/view.do?no="+parent);
+		// Json 출력(AJAX 요청)
+		JsonObject json = new JsonObject();
+		json.addProperty("result", result);
+		resp.getWriter().print(json);
 	}
 }

@@ -215,7 +215,8 @@ public class ArticleDAO extends DBHelper {
 		return comments;
 	}
 	
-	public void insertComment(ArticleDTO dto) {
+	public int insertComment(ArticleDTO dto) {
+		int result = 0;
 		
 		try {
 			conn = getConnection();
@@ -224,11 +225,12 @@ public class ArticleDAO extends DBHelper {
 			psmt.setString(2, dto.getContent());
 			psmt.setString(3, dto.getWriter());
 			psmt.setString(4, dto.getRegip());
-			psmt.executeUpdate();
+			result = psmt.executeUpdate();
 			close();
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+		return result;
 	}
 	
 	public void updateArticleForCommentPlus(String no) {
