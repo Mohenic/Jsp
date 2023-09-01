@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import kr.co.jboard2.db.DBHelper;
 import kr.co.jboard2.db.SQL;
 import kr.co.jboard2.dto.ArticleDTO;
+import kr.co.jboard2.dto.FileDTO;
 
 public class ArticleDAO extends DBHelper {
 
@@ -66,7 +67,16 @@ public class ArticleDAO extends DBHelper {
 				article.setHit(rs.getInt(8));
 				article.setWriter(rs.getString(9));
 				article.setRegip(rs.getString(10));
-				article.setRdate(rs.getString(11));				
+				article.setRdate(rs.getString(11));
+				// 파일 정보
+				FileDTO fileDto = new FileDTO();
+				fileDto.setFno(rs.getInt(12));
+				fileDto.setAno(rs.getInt(13));
+				fileDto.setOfile(rs.getString(14));
+				fileDto.setSfile(rs.getString(15));
+				fileDto.setDownload(rs.getInt(16));
+				fileDto.setRdate(rs.getString(17));
+				article.setFileDto(fileDto);
 			}
 			close();
 		}catch(Exception e){

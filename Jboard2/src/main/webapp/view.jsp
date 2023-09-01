@@ -11,10 +11,13 @@
                 <td><input type="text" name="title" value="${article.title}" readonly/></td>
             </tr>
             <c:if test="${article.file > 0}">
-            <tr>
-                <th>파일</th>
-                <td><a href="#">2020년 상반기 매출자료.xls</a>&nbsp;<span>7</span>회 다운로드</td>
-            </tr>
+	            <tr>
+	                <th>파일</th>
+	                <td>
+	                	<a href="#">${article.fileDto.ofile}</a>&nbsp;
+	                	<span>${article.fileDto.download}</span>회 다운로드
+	                </td>
+	            </tr>
             </c:if>
             <tr>
                 <th>내용</th>
@@ -58,11 +61,10 @@
                 <textarea name="content"></textarea>
                 <div>
                     <a href="#" class="btn btnCancel">취소</a>
-                    <input type="submit" class="btn btnWrite" value="작성완료"/>
+                    <input type="submit" value="작성완료" class="btn btnComplete"/>
                 </div>
             </form>
         </section>
-
     </section>
 </main>
 <%@ include file="./_footer.jsp" %>

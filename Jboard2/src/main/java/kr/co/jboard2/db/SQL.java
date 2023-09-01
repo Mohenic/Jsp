@@ -69,7 +69,12 @@ public class SQL {
 												+ "`rdate`=NOW()";
 	
 	public final static String SELECT_MAX_NO = "SELECT MAX(`no`) FROM `Article`";
-	public final static String SELECT_ARTICLE = "SELECT * FROM `Article` WHERE `no`=?";
+	
+	public final static String SELECT_ARTICLE = "SELECT * FROM `Article` AS a "
+												+ "LEFT JOIN `File` AS b "
+												+ "ON a.`no` = b.`ano` "
+												+ "WHERE `no`=?";
+	
 	public final static String SELECT_ARTICLES = "SELECT "
 												+ "a.*, "
 												+ "b.`nick` "
