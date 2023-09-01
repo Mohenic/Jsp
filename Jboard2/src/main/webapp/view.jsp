@@ -28,7 +28,7 @@
         </table>
         
         <div>
-            <a href="#" class="btn btnRemove">삭제</a>
+            <a href="/Jboard2/delete.do?no=${article.no}" class="btn btnRemove">삭제</a>
             <a href="./modify.do" class="btn btnModify">수정</a>
             <a href="./list.do" class="btn btnList">목록</a>
         </div>
