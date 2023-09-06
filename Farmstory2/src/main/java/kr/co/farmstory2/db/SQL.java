@@ -52,8 +52,16 @@ public class SQL {
 											   + "ORDER BY `no` DESC "
 											   + "LIMIT ?,10";
 	
+	public static final String UPDATE_ARTICLE = "UPDATE `Article` SET `title`=?, `content`=? WHERE `no`=?";
+	public static final String DELETE_ARTICLE = "DELETE FROM `Article` WHERE `no`=? OR `parent`=?";
+	
+	
+	
 	public static final String SELECT_MAX_NO = "SELECT MAX(`no`) FROM `Article`";
 	public static final String SELECT_COUNT_TOTAL = "SELECT COUNT(*) FROM `Article` WHERE `parent`=0 AND `cate`=?";
+	
+	
+	
 	public static final String INSERT_COMMENT = "INSERT INTO `Article` SET "
 											  + "`parent`=?, "
 											  + "`content`=?, "
@@ -67,6 +75,14 @@ public class SQL {
 											   + "FROM `Article` AS a "
 											   + "JOIN `User` AS b ON a.writer = b.uid "
 											   + "WHERE `parent`=?";
+	
+	public static final String SELECT_COMMENT_LATEST = "SELECT "
+													 + "a.*, "
+													 + "b.`nick` "
+													 + "FROM `Article` AS a "
+													 + "JOIN `User` AS b ON a.writer = b.uid "
+													 + "WHERE `parent`!= 0 "
+													 + "ORDER BY `no` DESC LIMIT 1";
 	
 	public static final String UPDATE_ARTICLE_FOR_COMMENT_PLUS = "UPDATE `Article` SET `comment` = `comment` + 1 WHERE `no`=?";
 	public static final String UPDATE_ARTICLE_FOR_COMMENT_MINUS = "UPDATE `Article` SET `comment` = `comment` - 1 WHERE `no`=?";
@@ -83,6 +99,23 @@ public class SQL {
 										   + "`rdate`=NOW()";
 	
 	public static final String SELECT_FILE = "SELECT * FROM `File` WHERE `fno`=?";
+	public static final String UPDATE_COUNT_FILE_PLUS = "UPDATE `Article` SET `file`=`file`+ 1 WHERE `no`=?";
+	public static final String UPDATE_COUNT_FILE_MINUS = "UPDATE `Article` SET `file`=`file`- 1 WHERE `no`=?";
+	
+	// Product
+	public static final String INSERT_PRODUCT = "INSERT INTO `Product` SET "
+											  + "`type`=?, "
+											  + "`pName`=?, "
+											  + "`price`=?, "
+											  + "`delivery`=?, "
+											  + "`stock`=?, "
+											  + "`thumb1`=?, "
+											  + "`thumb2`=?, "
+											  + "`thumb3`=?, "
+											  + "`seller`=?, "
+											  + "`etc`=?, "
+											  + "`rdate`=NOW()";
+			
 	
 	
 

@@ -16,4 +16,12 @@ public enum FileService {
 	public FileDTO selectFile(String fno) {
 		return dao.selectFile(fno);
 	}
+	
+	public void updateCountFilePlus(String no) {
+		dao.updateCountFilePlus(no);
+	}
+	
+	public void updateCountFileMinus(String no) {
+		dao.updateCountFileMinus(no);
+	}
 }

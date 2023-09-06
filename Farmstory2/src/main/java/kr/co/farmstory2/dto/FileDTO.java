@@ -22,6 +22,7 @@ public class FileDTO {
 	public void setAno(int ano) {
 		this.ano = ano;
 	}
+	
 	public String getOfile() {
 		return ofile;
 	}

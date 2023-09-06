@@ -1,10 +1,24 @@
 package kr.co.farmstory2.dao;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kr.co.farmstory2.db.DBHelper;
 import kr.co.farmstory2.db.SQL;
@@ -126,6 +140,42 @@ public class ArticleDAO extends DBHelper {
 		return articles;
 	}
 	
+	public int updateArticle(ArticleDTO dto) {
+		
+		int no = 0;
+		
+		try {
+			
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.UPDATE_ARTICLE);
+			psmt.setString(1, dto.getTitle());
+			psmt.setString(2, dto.getContent());
+			psmt.setInt(3, dto.getNo());
+			no = dto.getNo();
+			psmt.executeUpdate();
+			close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return no;
+	}
+	
+	public void deleteArticle(String no) {
+		try {
+			
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.DELETE_ARTICLE);
+			psmt.setString(1, no);
+			psmt.setString(2, no);
+			psmt.executeUpdate();
+			close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 	public int selectCountTotal(String cate) {
 		
 		int total = 0;
@@ -182,24 +232,46 @@ public class ArticleDAO extends DBHelper {
 		return comments;
 	}
 	
-	public int insertComment(ArticleDTO dto) {
+	public ArticleDTO insertComment(ArticleDTO dto) {
 			
-		int result = 0;
 		
 		try {
 			
 			conn = getConnection();
+			conn.setAutoCommit(false);
+			
+			stmt = conn.createStatement();
 			psmt = conn.prepareStatement(SQL.INSERT_COMMENT);
 			psmt.setInt(1, dto.getParent());
 			psmt.setString(2, dto.getContent());
 			psmt.setString(3, dto.getWriter());
 			psmt.setString(4, dto.getRegip());
 			psmt.executeUpdate();
+			rs = stmt.executeQuery(SQL.SELECT_COMMENT_LATEST);
+			conn.commit();
+			
+			if(rs.next()) {
+				dto.setNo(rs.getInt(1));
+				dto.setParent(rs.getInt(2));
+				dto.setComment(rs.getInt(3));
+				dto.setCate(rs.getString(4));
+				dto.setTitle(rs.getString(5));
+				dto.setContent(rs.getString(6));
+				dto.setFile(rs.getInt(7));
+				dto.setHit(rs.getInt(8));
+				dto.setWriter(rs.getString(9));
+				dto.setRegip(rs.getString(10));
+				dto.setRdateYYMMDD(rs.getString(11));
+				dto.setNick(rs.getString(12));
+			}
 			close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return result;
+		
+		logger.debug("dto : " + dto);
+		
+		return dto;
 	}
 	
 	public void updateArticleForCommentPlus(String no) {
@@ -226,17 +298,21 @@ public class ArticleDAO extends DBHelper {
 		}
 	}
 
-	public void updateComment(String no, String content) {
+	public int updateComment(String no, String content) {
+		
+		int result = 0;
+		
 		try {
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.UPDATE_COMMENT);
 			psmt.setString(1, content);
 			psmt.setString(2, no);
-			psmt.executeUpdate();
+			result = psmt.executeUpdate();
 			close();
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+		return result;
 	}
 	
 	public int deleteComment(String no) {
@@ -247,7 +323,7 @@ public class ArticleDAO extends DBHelper {
 			conn = getConnection();
 			psmt = conn.prepareStatement(SQL.DELETE_COMMENT);
 			psmt.setString(1, no);
-			psmt.executeUpdate();
+			result = psmt.executeUpdate();
 			close();
 		}catch (Exception e) {
 			e.printStackTrace();

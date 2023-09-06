@@ -11,12 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import kr.co.farmstory2.dto.ArticleDTO;
 import kr.co.farmstory2.service.ArticleService;
 
-@WebServlet("/comment.do")
+@WebServlet("/board/comment.do")
 public class CommentController extends HttpServlet {
 	private static final long serialVersionUID = 3096232538471515350L;
 
@@ -26,14 +27,21 @@ public class CommentController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		String kind = req.getParameter("kind");
+		String type = req.getParameter("type");
 		String no = req.getParameter("no");
+		String content = req.getParameter("content");
+		
+		logger.debug("type : " + type);
+		logger.debug("no : " + no);
 		
 		int result = 0;
 		
-		switch(kind) {
-			case "DEL":
+		switch(type) {
+			case "REMOVE":
 				result = service.deleteComment(no);
+				break;
+			case "MODIFY":
+				result = service.updateComment(no, content);
 				break;
 		}
 		
@@ -62,11 +70,14 @@ public class CommentController extends HttpServlet {
 		dto.setWriter(writer);
 		dto.setRegip(regip);
 		
-		int result = service.insertComment(dto);
+		ArticleDTO comment = service.insertComment(dto);
 		
-		JsonObject json = new JsonObject();
-		json.addProperty("result", result);
-		resp.getWriter().print(json);
+		resp.setContentType("application/json;charset=UTF-8");
+		Gson gson = new Gson();
+		String strJson = gson.toJson(comment);
+		resp.getWriter().print(strJson);
+		
+		
 		
 	}
 }

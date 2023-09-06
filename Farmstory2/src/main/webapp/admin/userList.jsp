@@ -110,6 +110,7 @@
         </article>
     </section>
 </main>
+<%@ include file="./_footer.jsp" %>
 <div id="userPopup">
     <section>
         <nav>

@@ -23,7 +23,7 @@
 <body>
     <div id="container">
         <header>
-            <a href="./index.html" class="logo"><img src="./images/admin_logo.jpg" alt="로고"/></a>
+            <a href="#" class="logo"><img src="/Farmstory2/admin/images/admin_logo.jpg" alt="로고"/></a>
             <p>
                 <a href="/">HOME |</a>
                 <a href="#">로그아웃 |</a>

@@ -43,6 +43,14 @@ public enum ArticleService {
 		return dao.selectArticles(cate, start);
 	}
 	
+	public int updateArticle(ArticleDTO dto) {
+		return dao.updateArticle(dto);
+	}
+	
+	public void deleteArticle(String no) {
+		dao.deleteArticle(no);
+	}
+	
 	public int selectCountTotal(String cate) {
 		return dao.selectCountTotal(cate);
 	}
@@ -51,7 +59,7 @@ public enum ArticleService {
 		return dao.selectComments(parent);
 	}
 	
-	public int insertComment(ArticleDTO dto) {
+	public ArticleDTO insertComment(ArticleDTO dto) {
 		return dao.insertComment(dto);
 	}
 	
@@ -63,12 +71,20 @@ public enum ArticleService {
 		dao.updateArticleForCommentMinus(no);
 	}
 
-	public void updateComment(String no, String content) {
-		dao.updateComment(no, content);
+	public int updateComment(String no, String content) {
+		return dao.updateComment(no, content);
 	}
 	
 	public int deleteComment(String no) {
 		return dao.deleteComment(no);
+	}
+	
+	// 업로드 경로 구하기
+	public String getPath(HttpServletRequest req, String dir) {
+		// 파일 업로드 경로 구하기 
+		ServletContext ctx = req.getServletContext();
+		String path = ctx.getRealPath(dir);
+		return path;
 	}
 	
 	// File 관련
@@ -116,6 +132,26 @@ public enum ArticleService {
 		return mr;
 	}
 	
+	public MultipartRequest uploadFile(HttpServletRequest req, String path) {
+		// 최대 업로드 파일 크기
+		int maxSize = 1024 * 1024 * 10;
+		
+		// 파일 업로드 및 Multipart 객체 생성
+		MultipartRequest mr = null;
+		
+		try {
+			mr = new MultipartRequest(req, 
+									  path, 
+									  maxSize, 
+									  "UTF-8", 
+									  new DefaultFileRenamePolicy());
+		} catch (IOException e) {
+			logger.error("uploadFile : " + e.getMessage());
+		}
+		
+		return mr;
+	}
+	
 	public void downloadFile(HttpServletRequest req, HttpServletResponse resp, FileDTO dto) throws IOException {
 		
 		resp.setContentType("application/octet-stream");
@@ -143,6 +179,8 @@ public enum ArticleService {
 		bis.close();
 		
 	}
+	
+	// 페이지 관련
 	
 	public int getLastPageNum(int total) {
 		
