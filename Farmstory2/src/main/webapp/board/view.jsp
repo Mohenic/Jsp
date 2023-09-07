@@ -210,8 +210,8 @@
 			        </tr>
 			    </table>
 			    <div>
-			        <a href="/Farmstory2//board/delete.do?group=${group}&cate=${cate}" class="btnDelete">삭제</a>
-			        <a href="/Farmstory2//board/modify.do?group=${group}&cate=${cate}&no=${no}" class="btnModify">수정</a>
+			        <a href="/Farmstory2//board/delete.do?group=${group}&cate=${cate}&no=${article.no}" class="btnDelete">삭제</a>
+			        <a href="/Farmstory2//board/modify.do?group=${group}&cate=${cate}&no=${article.no}" class="btnModify">수정</a>
 			        <a href="/Farmstory2//board/list.do?group=${group}&cate=${cate}" class="btnList">목록</a>
 			    </div>
 			    

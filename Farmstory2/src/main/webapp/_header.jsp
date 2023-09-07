@@ -19,7 +19,9 @@
     		alert('로그인에 실패 했습니다. 아이디, 비번을 다시 확인하시기 바랍니다.');
     	}else if(success == 101){
     		alert('로그인을 먼저 하셔야 합니다.');    		
-    	}    
+    	}else if(success == 200){
+    		alert('주문이 완료되었습니다.')
+    	} 
     
         $(function(){
             $('.slider > ul').bxSlider({
@@ -55,7 +57,7 @@
             
             <ul class="gnb">
                 <li><a href="/Farmstory2/introduction/hello.do">팜스토리소개</a></li>
-                <li><a href="/Farmstory2/market/list.do"><img src="/Farmstory2/images/head_menu_badge.png" alt="30%"/>장보기</a></li>
+                <li><a href="/Farmstory2/market/list.do?type=0&pg=1"><img src="/Farmstory2/images/head_menu_badge.png" alt="30%"/>장보기</a></li>
                 <li><a href="/Farmstory2/board/list.do?group=Croptalk&cate=story">농작물이야기</a></li>
                 <li><a href="/Farmstory2/board/list.do?group=Event&cate=event">이벤트</a></li>
                 <li><a href="/Farmstory2/board/list.do?group=Community&cate=notice">커뮤니티</a></li>

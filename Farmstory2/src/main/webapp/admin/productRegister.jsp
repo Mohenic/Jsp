@@ -9,7 +9,7 @@
 
         <article>
             <form action="/Farmstory2/admin/productRegister.do" method="post" enctype="multipart/form-data">
-            	<inpu type="hidden" name="seller" value="${sessUser.uid}"/>
+            	<input type="hidden" name="seller" value="${sessUser.uid}" />
                 <table border="0">
                     <tr>
                         <td>상품명</td>

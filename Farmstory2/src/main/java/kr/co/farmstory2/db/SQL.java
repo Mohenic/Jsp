@@ -101,6 +101,9 @@ public class SQL {
 	public static final String SELECT_FILE = "SELECT * FROM `File` WHERE `fno`=?";
 	public static final String UPDATE_COUNT_FILE_PLUS = "UPDATE `Article` SET `file`=`file`+ 1 WHERE `no`=?";
 	public static final String UPDATE_COUNT_FILE_MINUS = "UPDATE `Article` SET `file`=`file`- 1 WHERE `no`=?";
+	public static final String SELECT_FILE_SNAMES = "SELECT `sfile` FROM `File` WHERE `ano`=?";
+	public static final String DELETE_FILE = "DELETE FROM `File` WHERE `ano`=?";
+	
 	
 	// Product
 	public static final String INSERT_PRODUCT = "INSERT INTO `Product` SET "
@@ -115,8 +118,28 @@ public class SQL {
 											  + "`seller`=?, "
 											  + "`etc`=?, "
 											  + "`rdate`=NOW()";
-			
 	
+	public static final String SELECT_PRODUCT = "SELECT * FROM `Product` WHERE `pNo`=?";
+	public final static String SELECT_PRODUCTS_ALL = "SELECT * FROM `Product` WHERE `stock` > 0 LIMIT ?, 10";
+	public final static String SELECT_PRODUCTS_TYPE = "SELECT * FROM `Product` WHERE `stock` > 0 AND `type`=? LIMIT ?, 10";
+	public final static String SELECT_COUNT_PRODUCTS_ALL = "SELECT COUNT(*) FROM `Product` WHERE `stock` > 0";
+	public final static String SELECT_COUNT_PRODUCTS_TYPE = "SELECT COUNT(*) FROM `Product` WHERE `stock` > 0 AND `type`=?";
 	
+	// Order
+	
+	public static final String INSERT_ORDER = "INSERT INTO `Order` SET "
+											+ "`orderProduct`=?, "
+											+ "`orderCount`=?, "
+											+ "`orderDelivery`=?, "
+											+ "`orderPrice`=?, "
+											+ "`orderTotal`=?, "
+											+ "`receiver`=?, "
+											+ "`hp`=?, "
+											+ "`zip`=?, "
+											+ "`addr1`=?, "
+											+ "`addr2`=?, "
+											+ "`orderEtc`=?, "
+											+ "`orderUser`=?, "
+											+ "`orderDate`=NOW()";
 
 }

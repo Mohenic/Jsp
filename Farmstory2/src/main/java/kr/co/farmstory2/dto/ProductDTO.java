@@ -4,8 +4,9 @@ import java.io.File;
 import java.util.UUID;
 
 public class ProductDTO {
+	
 	private int pNo;
-	private int cate;
+	private int type;
 	private String pName;
 	private int price;
 	private int delivery;
@@ -34,14 +35,14 @@ public class ProductDTO {
 		this.pNo = pNo;
 	}
 	
-	public int getCate() {
-		return cate;
+	public int getType() {
+		return type;
 	}
-	public void setCate(int cate) {
-		this.cate = cate;
+	public void setType(int type) {
+		this.type = type;
 	}
-	public void setCate(String cate) {
-		this.cate = Integer.parseInt(cate);
+	public void setType(String type) {
+		this.type = Integer.parseInt(type);
 	}
 	public String getpName() {
 		return pName;
@@ -144,11 +145,13 @@ public class ProductDTO {
 
 	@Override
 	public String toString() {
-		return "ProductDTO [pNo=" + pNo + ", cate=" + cate + ", cate=" + cate + ", pName=" + pName + ", price=" + price
-				+ ", delivery=" + delivery + ", stock=" + stock + ", sold=" + sold + ", thumb1=" + thumb1 + ", thumb2="
-				+ thumb2 + ", thumb3=" + thumb3 + ", seller=" + seller + ", etc=" + etc + ", rdate=" + rdate + ", path="
-				+ path + "]";
+		return "ProductDTO [pNo=" + pNo + ", type=" + type + ", pName=" + pName + ", price=" + price + ", delivery="
+				+ delivery + ", stock=" + stock + ", sold=" + sold + ", thumb1=" + thumb1 + ", thumb2=" + thumb2
+				+ ", thumb3=" + thumb3 + ", seller=" + seller + ", etc=" + etc + ", rdate=" + rdate + ", path=" + path
+				+ "]";
 	}
+
+
 	
 	
 }

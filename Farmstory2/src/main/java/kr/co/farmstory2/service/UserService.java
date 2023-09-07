@@ -3,8 +3,10 @@ package kr.co.farmstory2.service;
 import kr.co.farmstory2.dao.UserDAO;
 import kr.co.farmstory2.dto.UserDTO;
 
-public class UserService {
+public enum UserService {
 
+	instance;
+	
 	private UserDAO dao = new UserDAO();
 	
 	public void insertUser(UserDTO dto) {

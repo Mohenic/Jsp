@@ -21,7 +21,7 @@ public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = -6259363977100195051L;
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
-	private UserService service = new UserService();
+	private UserService service = UserService.instance;
 
 	
 	@Override

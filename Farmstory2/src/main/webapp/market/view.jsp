@@ -1,5 +1,44 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="./_header.jsp" %>
+<%@ include file="../_header.jsp" %>
+<script>
+	const price    = ${product.price};
+	const delivery = ${product.delivery};
+	
+	window.onload = function(){
+		
+		const inputCount = document.getElementsByName('count');
+		const inputTotal = document.getElementsByName('total')[0];
+		const inputFinal = document.getElementsByName('final')[0];
+		const totalNode = document.getElementsByClassName('total')[0];
+		
+		// 상품 수량 변경
+		inputCount[0].onchange = (e) => {
+			e.preventDefault();
+			
+			let count = e.target.value;
+			let total = price * count;
+			let finalPrice = total + delivery;
+			
+			console.log('finalPrice : ' + finalPrice);
+			
+			inputCount[1].value = count;
+			inputTotal.value = total;
+			inputFinal.value = finalPrice;
+			
+			totalNode.innerText = total.toLocaleString()+'원';
+		};
+		
+		// 상품 구매(주문)
+		const formOrder = document.getElementById('formOrder');
+		const btnOrder = document.getElementsByClassName('btnOrder')[0];
+		btnOrder.onclick = (e) => {
+			e.preventDefault();
+			
+			// 폼 전송
+			formOrder.submit();
+		};
+	};
+</script>
         <div id="sub">
             <div><img src="../images/sub_top_tit2.png" alt="MARKET"></div>
             <section class="market">
@@ -21,27 +60,26 @@
                     <!-- 내용 시작 -->
                     <h3>기본정보</h3>
                     <div class="basic">
-                        <img src="../images/market_item_thumb.jpg" alt="딸기 500g">
-
-                        <table border="0">                            
+                        <img src="/Farmstory2/thumb/${product.thumb2}" alt="딸기 500g">
+                        <table border="0">
                             <tr>
                                 <td>상품명</td>
-                                <td>딸기 500g</td>
+                                <td>${product.pName}</td>
                             </tr>
                             <tr>
                                 <td>상품코드</td>
-                                <td>01</td>
+                                <td>${product.pNo}</td>
                             </tr>
                             <tr>
                                 <td>배송비</td>
                                 <td>
-                                    <span>5,000</span>원
+                                    <span>${product.delivery}</span>원
                                     <em>3만원 이상 무료배송</em>
                                 </td>
                             </tr>
                             <tr>
                                 <td>판매가격</td>
-                                <td>4,000원</td>
+                                <td>${product.price}원</td>
                             </tr>
                             <tr>
                                 <td>구매수량</td>
@@ -51,18 +89,27 @@
                             </tr>
                             <tr>
                                 <td>합계</td>
-                                <td class="total">4,000원</td>
+                                <td class="total">${product.price}원</td>
                             </tr>
-
-                            <a href="./order.html" class="btnOrder">
-                                <img src="../images/market_btn_order.gif" alt="바로 구매하기"/>
-                            </a>
-
                         </table>
+                        <form id="formOrder" action="/Farmstory2/market/order.do" method="post">
+                            <input type="hidden" name="thumb2" value="${product.thumb2}">
+                            <input type="hidden" name="pName" value="${product.pName}">
+                            <input type="hidden" name="pNo" value="${product.pNo}">
+                            <input type="hidden" name="delivery" value="${product.delivery}">
+                            <input type="hidden" name="price" value="${product.price}">
+                            <input type="hidden" name="count" value="1">
+                            <input type="hidden" name="total" value="${product.price}">
+                            <input type="hidden" name="final" value="${product.price + product.delivery}">
+                        </form>
+
+                        <a href="#" class="btnOrder">
+                            <img src="/Farmstory2/images/market_btn_order.gif" alt="바로 구매하기"/>
+                        </a>
                     </div>
                     <h3>상품설명</h3>
                     <div class="detail">
-                        <img src="../images/market_detail_sample.jpg" alt="">
+                        <img src="/Farmstory2/thumb/${product.thumb3}" alt="">
 
                     </div>
 
@@ -103,4 +150,4 @@
             </section>
 
         </div>
-<%@ include file="./_footer.jsp" %>
+<%@ include file="../_footer.jsp" %>

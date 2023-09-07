@@ -42,20 +42,20 @@ public class ProductRegisterController extends HttpServlet {
 		
 		// 데이터 수신
 		String productName = mr.getParameter("productName");
-		String cate = mr.getParameter("cate");
-		String price = mr.getParameter("price");
-		String delivery = mr.getParameter("delivery");
-		String stock = mr.getParameter("stock");
-		String thumb1 = mr.getParameter("thumb1");
-		String thumb2 = mr.getParameter("thumb2");
-		String thumb3 = mr.getParameter("thumb3");
-		String seller = mr.getParameter("seller");
-		String etc = mr.getParameter("etc");
-		
+		String type        = mr.getParameter("type");
+		String price       = mr.getParameter("price");
+		String delivery    = mr.getParameter("delivery");
+		String stock       = mr.getParameter("stock");
+		String thumb1      = mr.getOriginalFileName("thumb1");
+		String thumb2      = mr.getOriginalFileName("thumb2");
+		String thumb3      = mr.getOriginalFileName("thumb3");
+		String seller      = mr.getParameter("seller");
+		String etc         = mr.getParameter("etc");
+
 		// DTO 생성
 		ProductDTO dto = new ProductDTO(path);
 		dto.setpName(productName);
-		dto.setCate(cate);
+		dto.setType(type);
 		dto.setPrice(price);
 		dto.setDelivery(delivery);
 		dto.setStock(stock);
