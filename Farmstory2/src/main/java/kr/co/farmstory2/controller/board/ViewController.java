@@ -30,11 +30,12 @@ public class ViewController extends HttpServlet {
 		String cate = req.getParameter("cate");
 		String no = req.getParameter("no");
 		
+		// 글보기 구현
 		ArticleDTO article = service.selectArticle(no);
 		
 		logger.debug(article.toString());
 		
-		
+		// 댓글보기 구현
 		List<ArticleDTO> comments = service.selectComments(no);
 		
 		req.setAttribute("group", group);
@@ -42,6 +43,10 @@ public class ViewController extends HttpServlet {
 		req.setAttribute("no", no);
 		req.setAttribute("article", article);
 		req.setAttribute("comments", comments);
+		
+		
+		// 조회수 구현
+		service.updateArticleCountHit(no);
 		
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/board/view.jsp");
 		dispatcher.forward(req, resp);

@@ -126,7 +126,7 @@ public class ArticleDAO extends DBHelper {
 				dto.setHit(rs.getInt(8));
 				dto.setWriter(rs.getString(9));
 				dto.setRegip(rs.getString(10));
-				dto.setRdate(rs.getString(11));
+				dto.setRdateYYMMDD(rs.getString(11));
 				dto.setNick(rs.getString(12));
 				
 				articles.add(dto);
@@ -138,6 +138,33 @@ public class ArticleDAO extends DBHelper {
 			e.printStackTrace();
 		}
 		return articles;
+	}
+	
+	public List<ArticleDTO> selectLatests(String cate, int size) {
+		
+		List<ArticleDTO> latest = new ArrayList<>();
+		
+		try {
+			
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.SELECT_LATESTS);
+			psmt.setString(1, cate);
+			psmt.setInt(2, size);
+			rs = psmt.executeQuery();
+			
+			while(rs.next()) {
+				ArticleDTO dto = new ArticleDTO();
+				dto.setNo(rs.getInt(1));
+				dto.setTitle(rs.getString(2));
+				dto.setRdateYYMMDD(rs.getString(3));
+				latest.add(dto);
+			}
+			close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return latest;
 	}
 	
 	public int updateArticle(ArticleDTO dto) {
@@ -220,7 +247,7 @@ public class ArticleDAO extends DBHelper {
 				dto.setHit(rs.getInt(8));
 				dto.setWriter(rs.getString(9));
 				dto.setRegip(rs.getString(10));
-				dto.setRdate(rs.getString(11));
+				dto.setRdateYYMMDD(rs.getString(11));
 				dto.setNick(rs.getString(12));
 				
 				comments.add(dto);
@@ -294,6 +321,18 @@ public class ArticleDAO extends DBHelper {
 			psmt.executeUpdate();
 			close();
 		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void updateArticleCountHit(String no) {
+		try {
+			conn = getConnection();
+			psmt = conn.prepareStatement(SQL.UPDATE_ARTICLE_COUNT_HIT);
+			psmt.setString(1, no);
+			psmt.executeUpdate();
+			close();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

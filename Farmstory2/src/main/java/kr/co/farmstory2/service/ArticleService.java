@@ -43,6 +43,10 @@ public enum ArticleService {
 		return dao.selectArticles(cate, start);
 	}
 	
+	public List<ArticleDTO> selectLatests(String cate, int size){
+		return dao.selectLatests(cate, size);
+	}
+	
 	public int updateArticle(ArticleDTO dto) {
 		return dao.updateArticle(dto);
 	}
@@ -69,6 +73,10 @@ public enum ArticleService {
 	
 	public void updateArticleForCommentMinus(String no) {
 		dao.updateArticleForCommentMinus(no);
+	}
+	
+	public void updateArticleCountHit(String no) {
+		dao.updateArticleCountHit(no);
 	}
 
 	public int updateComment(String no, String content) {

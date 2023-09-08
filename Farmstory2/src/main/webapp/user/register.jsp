@@ -4,6 +4,7 @@
 <script src="/Farmstory2/js/zipcode.js"></script>
 <script src="/Farmstory2/js/validation.js"></script>
 <script src="/Farmstory2/js/checkUser.js"></script>
+<script src="/Farmstory2/js/authEmail.js"></script>
 
 <div id="user">
 	<section class="register">
@@ -49,11 +50,16 @@
                         <span class="resultNick"></span>                            
                     </td>
                 </tr>
-                <tr>
-                    <td>E-Mail</td>
+                 <tr>
+                    <td>이메일</td>
                     <td>
                         <input type="email" name="email" placeholder="이메일 입력"/>
-                        <span id="resultEmail"></span>
+                        <button type="button" id="btnEmailCode"><img src="/Farmstory2/images/chk_auth.gif" alt="인증번호 받기"/></button>
+                        <span class="resultEmail"></span>
+                        <div class="auth">
+                            <input type="text" name="auth" placeholder="인증번호 입력"/>
+                            <button type="button" id="btnEmailAuth"><img src="/Farmstory2/images/chk_confirm.gif" alt="확인"/></button>
+                        </div>
                     </td>
                 </tr>
                 <tr>

@@ -22,11 +22,11 @@ public enum UserService {
 	}
 	
 	public int selectCountNick(String nick) {
-		return dao.selectCountUid(nick);
+		return dao.selectCountNick(nick);
 	}
 	
 	public int selectCountEmail(String email) {
-		return dao.selectCountUid(email);
+		return dao.selectCountEmail(email);
 	}
 	
 	public int selectCountHp(String hp) {

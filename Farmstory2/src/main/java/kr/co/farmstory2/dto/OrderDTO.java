@@ -17,13 +17,30 @@ public class OrderDTO {
 	private String addr2;
 	private String orderEtc;
 	
+	private String pName;
+	private String thumb1;
 	
+	public String getThumb1() {
+		return thumb1;
+	}
+	public void setThumb1(String thumb1) {
+		this.thumb1 = thumb1;
+	}
+	public String getpName() {
+		return pName;
+	}
+	public void setpName(String pName) {
+		this.pName = pName;
+	}
 	
 	public int getOrderNo() {
 		return orderNo;
 	}
 	public void setOrderNo(int orderNo) {
 		this.orderNo = orderNo;
+	}
+	public void setOrderNo(String orderNo) {
+		this.orderNo = Integer.parseInt(orderNo);
 	}
 	public int getOrderProduct() {
 		return orderProduct;

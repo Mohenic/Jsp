@@ -42,11 +42,14 @@ public class ProductListController extends HttpServlet {
 			String pg =req.getParameter("pg");
 			String type = req.getParameter("type");
 			
+			if(type == null) {
+				type = "0";
+			}
+			
 			//페이지 관련 변수
 			int start=0;
 			int currentPage =1;
 			int total=0;
-			int allproduct=0;
 			int lastPageNum=0;
 			int pageGroupCurrent=1;
 			int pageGroupStart=1;
@@ -63,10 +66,6 @@ public class ProductListController extends HttpServlet {
 			//LIMIT 시작값계산
 			start =(currentPage -1)*10;
 
-			//전체 게시물 조회
-			allproduct=pService.selectCountProductTotal(type);
-			
-			
 			//타입별 게시물 갯수조회 
 			total=pService.selectCountProductTotal(type);
 			

@@ -26,7 +26,7 @@ public class CheckEmailController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String email = req.getParameter("email");
-		logger.debug("email" + email);
+		logger.debug("email : " + email);
 		
 		int result = service.selectCountEmail(email);
 		

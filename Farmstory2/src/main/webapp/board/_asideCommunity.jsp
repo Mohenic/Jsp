@@ -16,7 +16,7 @@
         </aside>
         <article>
             <nav>
-                <img src="${ctxPath}/images/sub_nav_tit_cate5_${cate}.png" alt="농작물이야기"/>
+                <img src="/Farmstory2/images/sub_nav_tit_cate5_${cate}.png" alt="농작물이야기"/>
                 <p>
                     HOME > 커뮤니티 > 
                     <c:if test="${cate eq 'notice'}"><em>공지사항</em></c:if>

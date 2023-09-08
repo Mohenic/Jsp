@@ -52,6 +52,13 @@ public class SQL {
 											   + "ORDER BY `no` DESC "
 											   + "LIMIT ?,10";
 	
+	public static final String SELECT_LATESTS = "SELECT "
+											  + "`no`, "
+											  + "`title`, "
+											  + "`rdate` "
+											  + "FROM `Article` WHERE `parent`=0 AND `cate`=? "
+											  + "ORDER BY `no` DESC LIMIT ?";
+	
 	public static final String UPDATE_ARTICLE = "UPDATE `Article` SET `title`=?, `content`=? WHERE `no`=?";
 	public static final String DELETE_ARTICLE = "DELETE FROM `Article` WHERE `no`=? OR `parent`=?";
 	
@@ -60,7 +67,9 @@ public class SQL {
 	public static final String SELECT_MAX_NO = "SELECT MAX(`no`) FROM `Article`";
 	public static final String SELECT_COUNT_TOTAL = "SELECT COUNT(*) FROM `Article` WHERE `parent`=0 AND `cate`=?";
 	
+	public static final String UPDATE_ARTICLE_COUNT_HIT = "UPDATE `Article` SET `hit` = `hit`+ 1 WHERE `parent`=0 AND `no`=?";
 	
+	// Comment
 	
 	public static final String INSERT_COMMENT = "INSERT INTO `Article` SET "
 											  + "`parent`=?, "
@@ -141,5 +150,25 @@ public class SQL {
 											+ "`orderEtc`=?, "
 											+ "`orderUser`=?, "
 											+ "`orderDate`=NOW()";
+	
+	public static final String SELECT_ORDER = "SELECT "
+											+ "a.*, "
+											+ "b.pName, "
+											+ "b.thumb2 "
+											+ "FROM `Order` AS a "
+											+ "JOIN `Product` AS b "
+											+ "ON a.orderProduct = b.pNo "
+											+ "WHERE `orderNo`=?";
+	
+	public static final String SELECT_ORDERS = "SELECT "
+											 + "a.*, "
+											 + "b.pName, "
+											 + "b.thumb1 "
+											 + "FROM `Order` AS a "
+											 + "JOIN `Product` AS b "
+											 + "ON a.orderProduct = b.pNo "
+											 + "ORDER BY `orderNo` LIMIT ?, 10";
+	
+	public static final String SELECT_COUNT_ORDERS = "SELECT COUNT(*) FROM `Order`";
 
 }

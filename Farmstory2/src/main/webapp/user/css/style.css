@@ -118,6 +118,10 @@
     border-top: 2px solid #111;
     margin-bottom: 10px;
 }
+
+.register table .auth {
+	display: none;
+}
 .register table caption {
     text-align: left;
     padding: 10px 0;

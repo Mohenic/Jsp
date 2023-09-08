@@ -7,8 +7,8 @@
                     <img src="../images/sub_aside_cate1_tit.png" alt="팜스토리 소개"/>
 
                     <ul class="lnb">
-                        <li><a href="./hello.html">인사말</a></li>
-                        <li class="on"><a href="./direction.html">찾아오시는 길</a></li>
+                        <li><a href="./hello.do">인사말</a></li>
+                        <li class="on"><a href="./direction.do">찾아오시는 길</a></li>
                     </ul>
 
                 </aside>

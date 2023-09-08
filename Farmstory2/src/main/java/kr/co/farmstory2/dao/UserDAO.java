@@ -96,7 +96,7 @@ public class UserDAO extends DBHelper {
 		try {
 			
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.SELECT_COUNT_UID);
+			psmt = conn.prepareStatement(SQL.SELECT_COUNT_NICK);
 			psmt.setString(1, nick);
 			rs = psmt.executeQuery();
 			
@@ -119,7 +119,7 @@ public class UserDAO extends DBHelper {
 		try {
 			
 			conn = getConnection();
-			psmt = conn.prepareStatement(SQL.SELECT_COUNT_UID);
+			psmt = conn.prepareStatement(SQL.SELECT_COUNT_EMAIL);
 			psmt.setString(1, email);
 			rs = psmt.executeQuery();
 			
