@@ -35,13 +35,14 @@
                     <th>가입일</th>
                     <th>확인</th>
                 </tr>
+                <c:forEach var="user" items="${users}">
                 <tr>
                     <td><input type="checkbox" name=""/></td>
-                    <td>a101</td>
-                    <td>김유신</td>                            
-                    <td>유신101</td>
-                    <td>yusin101@naver.com</td>
-                    <td>010-1234-1001</td>
+                    <td>${user.uid}</td>
+                    <td>${user.name}</td>                            
+                    <td>${user.nick}</td>
+                    <td>${user.email}</td>
+                    <td>${user.hp}</td>
                     <td>
                         <select name="grade">
                             <option>1</option>
@@ -51,51 +52,14 @@
                             <option>5</option>
                         </select>
                     </td>
-                    <td>2023-01-01 13:06:14</td>
+                    <td>${user.regDate}</td>
                     <td><a href="#" class="showPopup">[상세확인]</a></td>
                 </tr>
-                <tr>
-                    <td><input type="checkbox" name=""/></td>
-                    <td>a102</td>
-                    <td>김춘추</td>                            
-                    <td>춘추102</td>
-                    <td>chunchu102@naver.com</td>
-                    <td>010-1234-1002</td>
-                    <td>
-                        <select name="grade">
-                            <option>1</option>
-                            <option selected>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                    </td>
-                    <td>2023-01-02 13:06:14</td>
-                    <td><a href="#" class="showPopup">[상세확인]</a></td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" name=""/></td>
-                    <td>a103</td>
-                    <td>장보고</td>                            
-                    <td>보고103</td>
-                    <td>bogo103@naver.com</td>
-                    <td>010-1234-1003</td>
-                    <td>
-                        <select name="grade">
-                            <option>1</option>
-                            <option selected>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                    </td>
-                    <td>2023-01-03 13:06:14</td>
-                    <td><a href="#" class="showPopup">[상세확인]</a></td>
-                </tr>
+                </c:forEach>
             </table>
 
             <p>
-                <a href="#" class="orderDelete">선택수정</a>                        
+                <a href="#" class="orderModify">선택수정</a>                        
             </p>
             
             <p class="paging">

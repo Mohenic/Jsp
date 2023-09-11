@@ -18,7 +18,11 @@ public class SQL {
 										   + "`regip`=?,"
 										   + "`regDate`= NOW()";
 	
+	
 	public static final String SELECT_USER = "SELECT * FROM `User` WHERE `uid`=? and `pass`=SHA2(?, 256)";
+	public static final String SELECT_USERS ="SELECT * FROM `User` LIMIT ?,10";
+	
+	public static final String SELECT_COUNT_USERS = "SELECT COUNT(*) FROM `User`";
 	public static final String SELECT_COUNT_UID = "SELECT COUNT(*) FROM `User` WHERE `uid`=?";
 	public static final String SELECT_COUNT_NICK= "SELECT COUNT(*) FROM `User` WHERE `nick`=?";
 	public static final String SELECT_COUNT_EMAIL = "SELECT COUNT(*) FROM `User` WHERE `email`=?";
